@@ -1,6 +1,6 @@
-# Spatial Analysis in R 
+# Spatial Data Analysis in R 
 
-These are slides for the Spatial Analysis in R workshop at the Society for Conservation GIS 2021 Annual Conference. 
+Slides and resources for a workshop in *Spatial Data Analysis in R*.
 
 
 
