@@ -298,7 +298,7 @@ Workshop overview, resources, R vs GIS, RStudio
 <a target="_blank" class="slides" href="slides/syntax.html">Syntax Review</a>
 </li>
 <p class="slides_desc">
-Syntax rules, variables, naming styles, data types, sequences, basic plotting, functions, file names and directories, saving your work
+Syntax rules, variables, naming styles, data types, sequences
 </p>
 <li class="slides">
 <a target="_blank" class="slides" href="slides/packages.html">Working with Packages</a>
@@ -310,7 +310,7 @@ Finding packages, spatial package ecosystem, tidyverse, installing and loading p
 <a target="_blank" class="slides" href="slides/files-folders.html">Files and Folders</a>
 </li>
 <p class="slides_desc">
-Working with files &amp; folders for import and export
+Specifying file &amp; folder names when importing and exporting data
 </p>
 <li class="slides">
 <a target="_blank" class="slides" href="slides/importing-vector.html">Importing and Plotting Vector Data</a>
@@ -321,44 +321,86 @@ Spatial data classses; importing from Shapefiles, KMLs, geodatabases, and GeoPac
 <div class="hrleft">
 
 </div>
-<h1 id="may-12-visualizing-and-using-the-attribute-table" class>
-May 12. Visualizing and Using the Attribute Table
+<h1 id="may-12-spatial-data-manipulations-and-visualization" class>
+May 12. Spatial Data Manipulations and Visualization
 </h1>
 <p style="font-size:100%;">
-6:00p - 8:00p. Plotting with tmap and leaflet; Working with 2D data; Attribute queries
+6:00p - 8:00p. Spatial data manipulations; Plotting with tmap and leaflet;
 </p>
 <li class="slides">
-Session 1 Review
+<a target="_blank" class="slides" href="slides/review-pt1.html">Session 1 Review</a>
 </li>
 <p class="slides_desc">
 Review of last time
 </p>
 <li class="slides">
-Visualization with tmap and leaflet
+<a target="_blank" class="slides" href="slides/sf-manip.html">Common Manipulations for sf Objects</a>
+</li>
+<p class="slides_desc">
+WKT, projections, converting data frames into sf, exporting
+</p>
+<li class="slides">
+<a target="_blank" class="slides" href="slides/tmap-leaflet.html">Visualization with tmap and leaflet</a>
 </li>
 <p class="slides_desc">
 Creating static and interactive web maps with tmap &amp; leaflet
 </p>
-<li class="slides">
-Tables 101
+<li class="slides bonus">
+<a target="_blank" class="slides" href="slides/plotting-base-pt1.html">Plotting with Base R Part I</a>
 </li>
 <p class="slides_desc">
-Data frames &amp; matrices
+Plotting with base R
 </p>
-<li class="slides">
-Common Manipulations for sf Objects
+<li class="slides bonus">
+<a target="_blank" class="slides" href="slides/plotting-base-pt2.html">Plotting with Base R Part II</a>
 </li>
 <p class="slides_desc">
-WKT, projections, converting data frames into sf, exporting
+Making nicer maps with sf plot(); overlaying layers, attribute driven symbology
 </p>
 <div class="hrleft">
 
 </div>
 <h1 id="may-17-attribute-queries-automation-and-apis" class>
-May 17. Attribute Queries, Automation and APIs
+May 17. Attribute Queries, Automation, and APIs
 </h1>
 <p style="font-size:100%;">
-6:00p - 8:00p. Spatial data manipulations; Socrata API, TidyCensus
+6:00p - 8:00p. Wrangling tables with dplyr; Attribute queries; Joins; Automation with Code Loops; Getting Data from APIs
+</p>
+<li class="slides">
+<a target="_blank" class="slides" href="slides/tables101.html">Tables 101</a>
+</li>
+<p class="slides_desc">
+Intro to data frames &amp; matrices
+</p>
+<li class="slides">
+Manipulating Tables with dplyr
+</li>
+<p class="slides_desc">
+Data frame methods, piping, dplyr, importing csv files
+</p>
+<li class="slides">
+Working with Attribute Tables
+</li>
+<p class="slides_desc">
+Summarizing the attribute table, attribute queries, joins
+</p>
+<li class="slides">
+Automation and Batch Processing
+</li>
+<p class="slides_desc">
+Automating tasks with branches and loops; vectorized functions
+</p>
+<li class="slides">
+Getting Data from APIs
+</li>
+<p class="slides_desc">
+Using data and API packages, functions to import data directly into R, API keys
+</p>
+<li class="slides">
+Using the Socrata API
+</li>
+<p class="slides_desc">
+Importing SF Data using the Socrata API
 </p>
 <div class="hrleft">
 
@@ -367,7 +409,31 @@ May 17. Attribute Queries, Automation and APIs
 May 19. Geoprocessing &amp; Spatial Queries
 </h1>
 <p style="font-size:100%;">
-6:00p - 8:00p (Zoom).
+6:00p - 8:00p. Geoprocessing functions; spatial queries
+</p>
+<li class="slides">
+Geoprocessing Pt1
+</li>
+<p class="slides_desc">
+Geoprocessing functions with sf
+</p>
+<li class="slides">
+Lists
+</li>
+<p class="slides_desc">
+Working with list objects
+</p>
+<li class="slides">
+Spatial Queries
+</li>
+<p class="slides_desc">
+Spatial queries, finding nearest neighbors
+</p>
+<li class="slides bonus">
+Geoprocessing Pt2
+</li>
+<p class="slides_desc">
+Dissolving boundaries, geoprocessing chains, Voronoi polygons
 </p>
 <div class="hrleft">
 
@@ -376,7 +442,43 @@ May 19. Geoprocessing &amp; Spatial Queries
 May 24. Wildcard
 </h1>
 <p style="font-size:100%;">
-6:00p - 8:00p (Zoom)
+6:00p - 8:00p.
+</p>
+<li class="slides">
+Connecting R &amp; ArcGIS
+</li>
+<p class="slides_desc">
+R-ArcGIS Bridge, imorting data from AGOL
+</p>
+<li class="slides">
+Raster Pt I. Importing and Plotting Raster Data
+</li>
+<p class="slides_desc">
+Importing rasters, raster metadata, crop, color, slope, aspect, and hill shade
+</p>
+<li class="slides">
+Raster Pt II. Common Raster Manipulations
+</li>
+<p class="slides_desc">
+Projecting a raster, mask, resample, stretch, stack, rasterize vectors, export
+</p>
+<li class="slides">
+Raster Pt III. Raster Analysis Functions
+</li>
+<p class="slides_desc">
+Overlays, raster algebra,
+</p>
+<li class="slides">
+Raster Case Study. Multi-Criteria Analysis
+</li>
+<p class="slides_desc">
+How MCA works, siting a new campground in YNP
+</p>
+<li class="slides">
+Spatial Stats Sampler
+</li>
+<p class="slides_desc">
+Point pattern analysis, Kriging, zonal stats, etc.
 </p>
 <div class="hrleft">
 
@@ -385,7 +487,7 @@ May 24. Wildcard
 May 26. Wildcard
 </h1>
 <p style="font-size:100%;">
-6:00p - 8:00p (Zoom)
+6:00p - 8:00p.
 </p>
 <div class="hrleft">
 
@@ -410,6 +512,12 @@ Color models, color functions, RColorBrewer
 </li>
 <p class="slides_desc">
 Writing your own functions
+</p>
+<li class="slides bonus">
+<a target="_blank" class="slides" href="slides/text-functions.html">Working with Text</a>
+</li>
+<p class="slides_desc">
+Text manipulation functions in R
 </p>
 <li class="slides bonus">
 <a target="_blank" class="slides" href="slides/geocoding.html">Geocoding</a>

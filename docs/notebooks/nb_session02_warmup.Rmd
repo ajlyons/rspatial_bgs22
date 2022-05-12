@@ -1,0 +1,68 @@
+---
+title: "Session 2 Warm-Up"
+output: 
+  html_notebook:
+    toc: yes
+    toc_float: yes
+---
+
+## Introduction
+
+In this Notebook you'll practice importing some data into R and making a map.
+
+TIP: Use the workshop materials we saw last time, including slides, notebooks, and datasets description.
+
+\
+
+## 1) List the Layers in a File Geodatabase
+
+There's a file geodatabase in the 'data' folder called `yose_communications.gdb`.
+
+Write an expression that returns the layers in this geodatabase. [Hint](https://bit.ly/3N5IExu). [Answer](https://bit.ly/3FG495z)
+
+```{r chunk01}
+## Your answer here
+
+```
+
+\
+
+## 2) Import the Cell Towers
+
+Import the `Cell_Towers` layer, which is a point layer. [Answer](https://bit.ly/3L4FOrb)
+
+```{r chunk02}
+## Your answer here
+
+```
+
+\
+
+How many cell towers are in the layer? [Hint](https://bit.ly/3LbHb7s). [Answer](https://bit.ly/3LnHpJ7)
+
+```{r chunk03}
+## Your answer here
+
+```
+
+\
+
+What projection is it in? [Hint](https://bit.ly/3LezT2W). [Answer](https://bit.ly/3FJ3WOZ)
+
+```{r chunk04}
+## Your answer here
+
+```
+
+\
+
+## 3) Make a plot of the cell towers:
+
+[Solution](https://bit.ly/38l9kvM)
+
+```{r chunk05}
+## Your answer here
+
+```
+
+

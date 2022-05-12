@@ -506,7 +506,7 @@ a.exercises {
 }
 
 p.slides_desc {
-  margin-left: 60px;
+  margin-left: 50px;
   font-style:italic;
   font-size:90%;
 }
@@ -524,6 +524,10 @@ p.exercises_desc {
   background-color:transparent;
   margin-left: 2em;
   border: 2px solid lightgray;
+}
+
+code span.do {
+  color: inherit;
 }
 
 /* ======== No longer used ==============
