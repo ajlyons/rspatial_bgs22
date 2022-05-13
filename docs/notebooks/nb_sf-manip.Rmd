@@ -18,7 +18,21 @@ In this Notebook you'll practice importing some tabular data in to R, converting
 miss_pips_df <- read.csv("./data/yosemite_missing_people.csv", stringsAsFactors = FALSE)
 
 head(miss_pips_df)
-# View(missing_pips_df)
+# View(miss_pips_df)
+```
+
+\
+
+Let's reduce the number of columns:
+
+```{r chunk02}
+library(dplyr)
+
+miss_pips_thin_df <- miss_pips_df %>% 
+  select(Long, Lat, Type, CaseNumber, IncidYear, ContactMet, IncidType, NumberofSu, GroupDynam, 
+         SubjectCat, SubSex, SubAge, IncidContr, Scenario, RescueMeth, Incident_N, Found_GR_N)
+
+head(miss_pips_thin_df)
 ```
 
 \
@@ -27,34 +41,31 @@ head(miss_pips_df)
 
 For convenience, here are some EPSG numbers:
 
-```{r chunk02}
-## Some common epsg numbers in California
+```{r chunk03}
 epsg_geo_wgs84 <- 4326       ## General long-lat
-epsg_geo_nad83 <- 4269       ## General long-lat   
-epsg_utm10n_wgs84 <- 32610
-epsg_utm11n_wgs84 <- 32611   ## use this one for YNP
-epsg_utm10n_nad83 <- 26910
-epsg_utm11n_nad83 <- 26911
-epsg_webmerc <- 3857
-epsg_caalbers <- 3310
+epsg_utm11n_nad83 <- 26911   ## use this one for YNP
 ```
 
+Convert a data frame to a spatial object with `st_as_sf()`. You have to specify the names of the columns that contain the coordinates, and the EPSG number of the coordinates.
 
-```{r chunk03}
+```{r chunk04}
 library(sf)
 
-miss_pips_sf <- st_as_sf(miss_pips_df, coords = c("Long", "Lat"), crs = epsg_geo_wgs84) %>% 
-  dplyr::select(Type, CaseNumber, IncidYear, ContactMet, IncidType, NumberofSu, GroupDynam, SubjectCat, 
-         SubSex, SubAge, IncidContr, Scenario, RescueMeth, Incident_N, Found_GR_N)
+miss_pips_sf <- st_as_sf(miss_pips_thin_df, 
+                         coords = c("Long", "Lat"), 
+                         crs = epsg_geo_wgs84) 
 
 miss_pips_sf
 ```
 
 \
 
-## 3) Project it to UTM 11N
+## 3) Project the missing persons layer to UTM 11N (NAD83)
 
-```{r chunk04}
+[Hint](https://bit.ly/3wJ46lJ). [Answer](https://bit.ly/3wmhGv6)
+
+```{r chunk05}
+## Your answer here
 
 ```
 
@@ -62,9 +73,12 @@ miss_pips_sf
 
 ## 4) Save as GeoJSON
 
-```{r chunk05}
+You can save a spatial object to disk with `st_write()`. R will figure out what format to use based on the file name extension. 
+
+Save the Missing Persons layer as GeoJSON: [Answer](https://bit.ly/3wb8KcM)
+
+```{r chunk06}
+## Your answer here
 
 ```
-
-
 

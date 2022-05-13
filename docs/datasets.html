@@ -266,7 +266,7 @@ summary {
   outline:none;  
 }
 </style>
-<p>The following data are available in the workshop ‘data’ folder, which you can download <a href="https://github.com/ucanr-igis/rspatial_data" target="_blank" rel="noopener">here</a> (click the <img src="images/clone_download_btn_102x32x256.png" width="76" /> button).</p>
+<p>The following data are available in the workshop folder under <code>notebooks/data</code>. You can download just the data files <a href="https://ucdavis.box.com/shared/static/yv06a9m945uwlu3gm42e6zhdkr0f42v7.zip" target="_blank" rel="noopener">here</a>.</p>
 <div id="yosemite-data" class="section level1">
 <h1>Yosemite Data</h1>
 <p><h2 id="yose_boundary">yose_boundary.shp</h2></p>
@@ -353,7 +353,13 @@ import code
 <ul>
 <li>Lost person incident data from years 2000 to 2010 for Yosemite National Park<br />
 </li>
-<li>Source: <a href="https://hub.arcgis.com/datasets/pjdohertymaps::missing" class="uri">https://hub.arcgis.com/datasets/pjdohertymaps::missing</a></li>
+<li>Source: <a href="https://hub.arcgis.com/datasets/pjdohertymaps::missing" class="uri">https://hub.arcgis.com/datasets/pjdohertymaps::missing</a>
+<details>
+<summary>
+import code
+</summary>
+<pre>miss_pips_df <- read.csv("./data/yosemite_missing_people.csv")</pre>
+</details></li>
 </ul>
 <p><h2 id="yose_historic_pts">yose_historic_pts.kml</h2></p>
 <ul>

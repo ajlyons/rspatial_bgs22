@@ -317,9 +317,45 @@ head(miss_pips_df)</code></pre>
   </script>
 </div>
 <!-- rnb-frame-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBWaWV3KG1pc3NpbmdfcGlwc19kZilcbmBgYCJ9 -->
-<pre class="r"><code># View(missing_pips_df)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBWaWV3KG1pc3NfcGlwc19kZilcbmBgYCJ9 -->
+<pre class="r"><code># View(miss_pips_df)</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p><br />
+</p>
+<p>Let’s reduce the number of columns:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShkcGx5cilcbmBgYCJ9 -->
+<pre class="r"><code>library(dplyr)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5BdHRhY2hpbmcgcGFja2FnZTog4oCYZHBseXLigJlcblxuVGhlIGZvbGxvd2luZyBvYmplY3RzIGFyZSBtYXNrZWQgZnJvbSDigJhwYWNrYWdlOnN0YXRz4oCZOlxuXG4gICAgZmlsdGVyLCBsYWdcblxuVGhlIGZvbGxvd2luZyBvYmplY3RzIGFyZSBtYXNrZWQgZnJvbSDigJhwYWNrYWdlOmJhc2XigJk6XG5cbiAgICBpbnRlcnNlY3QsIHNldGRpZmYsIHNldGVxdWFsLCB1bmlvblxuIn0= -->
+<pre><code>
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWlzc19waXBzX3RoaW5fZGYgPC0gbWlzc19waXBzX2RmICU+JSBcbiAgc2VsZWN0KExvbmcsIExhdCwgVHlwZSwgQ2FzZU51bWJlciwgSW5jaWRZZWFyLCBDb250YWN0TWV0LCBJbmNpZFR5cGUsIE51bWJlcm9mU3UsIEdyb3VwRHluYW0sIFxuICAgICAgICAgU3ViamVjdENhdCwgU3ViU2V4LCBTdWJBZ2UsIEluY2lkQ29udHIsIFNjZW5hcmlvLCBSZXNjdWVNZXRoLCBJbmNpZGVudF9OLCBGb3VuZF9HUl9OKVxuXG5oZWFkKG1pc3NfcGlwc190aGluX2RmKVxuYGBgIn0= -->
+<pre class="r"><code>miss_pips_thin_df &lt;- miss_pips_df %&gt;% 
+  select(Long, Lat, Type, CaseNumber, IncidYear, ContactMet, IncidType, NumberofSu, GroupDynam, 
+         SubjectCat, SubSex, SubAge, IncidContr, Scenario, RescueMeth, Incident_N, Found_GR_N)
+
+head(miss_pips_thin_df)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6NiwibmNvbCI6MTcsInN1bW1hcnkiOnsiRGVzY3JpcHRpb24iOlsiZGYgWzYgeCAxN10iXX19LCJyZGYiOiJINHNJQUFBQUFBQUFCcjFXeldza1JSVHZTVEl6eVdqV3hMMzZVZXNYTGlTVFpMSzdMS2dRTXpIWmFKSWRacklmRWNKUzAxMDlYVHZWWGIzVjFabU1lL0VvZ3VqK0NWNEZqNElYSWVoVkZnU1hSVHlzS0hvUXhJTjRrNnl2ZXFvNjZYWmtaUlVIaXE1NjlkNzcvZDVIVlUxejVlcGk1V3JGc3F4UmE2d3dhbzBXWVdxVjZvMkYydG1hWlkyTndLcGdqVmtUNnJzUFdpZGhNZzNqaEZJNzJQMzV4bHRUbmNzSHU3L2RjU3Rmdkg2dys5T3BqMS81NkttRDNSL3VMSlEvWXdlN1A5NC9IZjIrQmZMYmR6OS80WjZ4VzFyKyt0Znp0K2J1TGkxL2YrUFRiNTJiUzh2M2JqNnovVWR2YWZtNzI3OThXZHlCZGJqVkt3bjQyaWMvblBnRWJLYVVuU1l5dXQ1b1BPelVzaWFWcDBMdHZYY0t0ZmVmS05RK2VCbkdZYUYyUzhMNHl1eGJWdm1iNFNQRDVQRlczTDVPYklucWhESFU4SGhBOU01VWs0UmNTT0tnVFJwRk5PZzhRUDVmZU1weUs3VUlGcmFuVjQrMVNJZ0ZWdW9OTEdSZmk4c1g5NGh3WXZKUU5tbXVvRVdHaitOOEhtMXh4cEVPODMrUjVXcTFTUUtKR1dvU2lZV0RKZVdCM2lsZW9GMGk5R0t5N2xIbW9CY1hGbWNYenA0ZXB2R0kxamd6ZXk2M253VWMyOFNNL0t2NVVZS2Z0Z1kvZFh5ZTFiSW5jM2pqSzFoMEF4SkZwazZYZ203QWU4SHc1WGdMRm5Qck5ubUFkaTZtRFI2WlpFK2s3VEc4bWY2WmJyNUpBQlJ0WXR1ajZRRW9YOEdzeTJQanFuaFJlbWt0S2hjSW96WVBaU3JKYk90RkZxTnJqbG9QUnlnQ3ZNampCTTdQREdvVEcvc0VPVFRpZ2tLM0VHY0c0Y0JCTm1ZTURvSExCZklJQzZ1bXc1QkRJbHZRTnV5Qkt6L3BMOVpIdHFmMGd3NXhxaHB5WjZpQkpDVEFIWUo4cVBWTDREMEdLQm9nK0JBQXdzd0ZjT1R4V0NCWGNCOEpjOTc5d1hsSGt2b2tEK0JCSXpwb2gwZkVwNUtnVldBU29XMkJLVXNpVVNFUGdMRFNqVkFiOUJGMklYOFF2WEthb3ZCTU1kL05Bc1RoRVlhYnc1QWNiWUVMRDYxd0grSUtHUTRDa29pVkxXcGp1NnNXVUJsMFdTV3FqL1lvUmtuaDY0S1FybmJWamlWaTBFRklDamkxd0VRWnFYSnBSbThhUnJwcVVYcFpKZGx5c1NwOVFrZ1FHWXVVUWdRcGxZUWh3VUVMSkQxTTVhQzBzRFZRMVFpaFFaQ2NkeEYwaVpBMmtPS3VxemdCeFI1Y0JFUkZwUkozS1F3QjcyOHpQNXlsdGdXWkRQN1NxSHcxcWRUMUdKSVF3UUh3QURwSm0rU2htYjRHdllQcUhxWUNiVkJYcXJJdVk2Y0RUQm80aWxDclM1VUkrb2d3c3BkY2Vzb1NoNkhnKzlRSEl0Q3Y1MmRxOC9QSU5RZHNidFYwb2dJQWFnbEZ4bFU1ZURJMzJmTDVzYlAyM0tycHE0MDNHcnFsa29Lcm5yTzVIeklpVFRldFpTQ3dJRml4V2c4Y0NreWJGUGpQNURndUtvYUU2T3lySEtqTWFuZW5VdWcwL1JzY25BeHFmT1pjYlZFclBqOVFET0NWUzV3czQ2QzdPSHNGOTRFSzhJMmcyT3BaeVA3dktRWlF1RWpYWnZyb2NrdGY0dEVOYkhJM3R0MFBUWkNWT283SVZ1eTMweFJOckFjMmRYWUFQVlhoY0dmWWNwUElqTXB4THdNUDNHM0ZSckltZUJ5dTlJR1drZWhHcmFjOFNpQnBrZjFqcTFjN3FjY0VRaUViR3VNdEcyNGlRYm5SYU1JMUZSTmc1V1ZzNElLN3RtVWtTU3F2clRWQmtzM1hoT0M5cXNtWmVzQkczaDQ4WHFWOFltMEdQYW9UYTRRVmVKcHgxUlZnRDZ2RG5Fa1pybnFvRUJpTnFIK2l4Wnh4UWVRRVpkdUxnKzU4VFRtMmp2NlhUT3B2NmRoOGVnQTFjbCs3S0pya3dVMSs5QmdWR1c0VDAzY25JTklrMEdvb29JRk1CQ0NOcXBMRFkyQWtObWRHa3NSa0hmNEpZeUN6Z0hrTEFBQT0ifQ== -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Long"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Lat"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Type"],"name":[3],"type":["chr"],"align":["left"]},{"label":["CaseNumber"],"name":[4],"type":["int"],"align":["right"]},{"label":["IncidYear"],"name":[5],"type":["int"],"align":["right"]},{"label":["ContactMet"],"name":[6],"type":["chr"],"align":["left"]},{"label":["IncidType"],"name":[7],"type":["chr"],"align":["left"]},{"label":["NumberofSu"],"name":[8],"type":["int"],"align":["right"]},{"label":["GroupDynam"],"name":[9],"type":["chr"],"align":["left"]},{"label":["SubjectCat"],"name":[10],"type":["chr"],"align":["left"]},{"label":["SubSex"],"name":[11],"type":["chr"],"align":["left"]},{"label":["SubAge"],"name":[12],"type":["int"],"align":["right"]},{"label":["IncidContr"],"name":[13],"type":["chr"],"align":["left"]},{"label":["Scenario"],"name":[14],"type":["chr"],"align":["left"]},{"label":["RescueMeth"],"name":[15],"type":["chr"],"align":["left"]},{"label":["Incident_N"],"name":[16],"type":["chr"],"align":["left"]},{"label":["Found_GR_N"],"name":[17],"type":["chr"],"align":["left"]}],"data":[{"1":"-119.6632","2":"37.66355","3":"IPP","4":"20090248","5":"2009","6":"Subject Cell Phone","7":"Search","8":"1","9":"Solo Subject","10":"Mental Retardation","11":"Male","12":"31","13":"Darkness","14":"Lost","15":"Snow Machine","16":"Subject was snowshoeing, became disoriented, and called for help. Subject described as mentally challenged.","17":"Found just south of the top of the Eale Chair Lift at Badger Pass Ski at an elevation of approximately 8,200 ft","_rn_":"1"},{"1":"-119.8099","2":"37.76910","3":"IPP","4":"20090652","5":"2009","6":"Reported Missing","7":"Separated Party","8":"1","9":"Solo Subject","10":"Hiker","11":"Male","12":"0","13":"Unknown","14":"Separated","15":"Walkout","16":"Subject described as teenage male; found in under half an hour from reported missing time","17":"Found in the parking lot looking for his mother","_rn_":"2"},{"1":"-119.5958","2":"37.74595","3":"IPP","4":"20090940","5":"2009","6":"Reported Missing","7":"Overdue","8":"1","9":"Solo Subject","10":"Child (13-15)","11":"Male","12":"14","13":"Unknown","14":"Overdue","15":"Other","16":"Subject hiked Yosemite Falls Trail and was found at his bike after being reported overdue","17":"Found at LKP after hike was complete","_rn_":"3"},{"1":"-119.5599","2":"37.75631","3":"IPP","4":"20091134","5":"2009","6":"Subject Cell Phone","7":"Search","8":"1","9":"Solo Subject","10":"Hiker","11":"Male","12":"35","13":"Snow/Ice","14":"Lost","15":"Helicopter","16":"Subject hiked up Yosemite falls Trail and to North Dome; planned to hike back to the Valley via Snow Creek Trail but lost tral due to snow","17":"Found in the area of Indian Ridge, approximately 300 feet off the trail","_rn_":"4"},{"1":"-119.5937","2":"37.74561","3":"IPP","4":"20091252","5":"2009","6":"Reported Missing","7":"Separated Party","8":"1","9":"Solo Subject","10":"Child (4-6)","11":"Male","12":"6","13":"Unknown","14":"Separated","15":"Other","16":"Subject became separated from father and returned to his hotel room to wait for his return","17":"Found at Yosemite Lodge room 4623","_rn_":"5"},{"1":"-119.6064","2":"37.74521","3":"IPP","4":"20091345","5":"2009","6":"Reported Missing","7":"Overdue","8":"1","9":"Solo Subject","10":"Hiker","11":"Male","12":"29","13":"Unknown","14":"Overdue","15":"Other","16":"Subject took shortcut off trail while hiking Upper Yosemite Falls Trail and became separated from hiking partner","17":"Found near the Bank3-Way intersection","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10],"total":[17]},"rows":{"min":[10],"max":[10],"total":[6]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p><br />
@@ -330,19 +366,13 @@ head(miss_pips_df)</code></pre>
 <p>For convenience, here are some EPSG numbers:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyMgU29tZSBjb21tb24gZXBzZyBudW1iZXJzIGluIENhbGlmb3JuaWFcbmVwc2dfZ2VvX3dnczg0IDwtIDQzMjYgICAgICAgIyMgR2VuZXJhbCBsb25nLWxhdFxuZXBzZ19nZW9fbmFkODMgPC0gNDI2OSAgICAgICAjIyBHZW5lcmFsIGxvbmctbGF0ICAgXG5lcHNnX3V0bTEwbl93Z3M4NCA8LSAzMjYxMFxuZXBzZ191dG0xMW5fd2dzODQgPC0gMzI2MTEgICAjIyB1c2UgdGhpcyBvbmUgZm9yIFlOUFxuZXBzZ191dG0xMG5fbmFkODMgPC0gMjY5MTBcbmVwc2dfdXRtMTFuX25hZDgzIDwtIDI2OTExXG5lcHNnX3dlYm1lcmMgPC0gMzg1N1xuZXBzZ19jYWFsYmVycyA8LSAzMzEwXG5gYGAifQ== -->
-<pre class="r"><code>## Some common epsg numbers in California
-epsg_geo_wgs84 &lt;- 4326       ## General long-lat
-epsg_geo_nad83 &lt;- 4269       ## General long-lat   
-epsg_utm10n_wgs84 &lt;- 32610
-epsg_utm11n_wgs84 &lt;- 32611   ## use this one for YNP
-epsg_utm10n_nad83 &lt;- 26910
-epsg_utm11n_nad83 &lt;- 26911
-epsg_webmerc &lt;- 3857
-epsg_caalbers &lt;- 3310</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZXBzZ19nZW9fd2dzODQgPC0gNDMyNiAgICAgICAjIyBHZW5lcmFsIGxvbmctbGF0XG5lcHNnX3V0bTExbl9uYWQ4MyA8LSAyNjkxMSAgICMjIHVzZSB0aGlzIG9uZSBmb3IgWU5QXG5gYGAifQ== -->
+<pre class="r"><code>epsg_geo_wgs84 &lt;- 4326       ## General long-lat
+epsg_utm11n_nad83 &lt;- 26911   ## use this one for YNP</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>Convert a data frame to a spatial object with <code>st_as_sf()</code>. You have to specify the names of the columns that contain the coordinates, and the EPSG number of the coordinates.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShzZilcbmBgYCJ9 -->
@@ -351,10 +381,10 @@ epsg_caalbers &lt;- 3310</code></pre>
 <!-- rnb-output-begin eyJkYXRhIjoiTGlua2luZyB0byBHRU9TIDMuOS4xLCBHREFMIDMuMi4xLCBQUk9KIDcuMi4xOyBzZl91c2VfczIoKSBpcyBUUlVFXG4ifQ== -->
 <pre><code>Linking to GEOS 3.9.1, GDAL 3.2.1, PROJ 7.2.1; sf_use_s2() is TRUE</code></pre>
 <!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWlzc19waXBzX3NmIDwtIHN0X2FzX3NmKG1pc3NfcGlwc19kZiwgY29vcmRzID0gYyhcIkxvbmdcIiwgXCJMYXRcIiksIGNycyA9IGVwc2dfZ2VvX3dnczg0KSAlPiUgXG4gIGRwbHlyOjpzZWxlY3QoVHlwZSwgQ2FzZU51bWJlciwgSW5jaWRZZWFyLCBDb250YWN0TWV0LCBJbmNpZFR5cGUsIE51bWJlcm9mU3UsIEdyb3VwRHluYW0sIFN1YmplY3RDYXQsIFxuICAgICAgICAgU3ViU2V4LCBTdWJBZ2UsIEluY2lkQ29udHIsIFNjZW5hcmlvLCBSZXNjdWVNZXRoLCBJbmNpZGVudF9OLCBGb3VuZF9HUl9OKVxuXG5taXNzX3BpcHNfc2ZcbmBgYCJ9 -->
-<pre class="r"><code>miss_pips_sf &lt;- st_as_sf(miss_pips_df, coords = c(&quot;Long&quot;, &quot;Lat&quot;), crs = epsg_geo_wgs84) %&gt;% 
-  dplyr::select(Type, CaseNumber, IncidYear, ContactMet, IncidType, NumberofSu, GroupDynam, SubjectCat, 
-         SubSex, SubAge, IncidContr, Scenario, RescueMeth, Incident_N, Found_GR_N)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWlzc19waXBzX3NmIDwtIHN0X2FzX3NmKG1pc3NfcGlwc190aGluX2RmLCBcbiAgICAgICAgICAgICAgICAgICAgICAgICBjb29yZHMgPSBjKFwiTG9uZ1wiLCBcIkxhdFwiKSwgXG4gICAgICAgICAgICAgICAgICAgICAgICAgY3JzID0gZXBzZ19nZW9fd2dzODQpIFxuXG5taXNzX3BpcHNfc2ZcbmBgYCJ9 -->
+<pre class="r"><code>miss_pips_sf &lt;- st_as_sf(miss_pips_thin_df, 
+                         coords = c(&quot;Long&quot;, &quot;Lat&quot;), 
+                         crs = epsg_geo_wgs84) 
 
 miss_pips_sf</code></pre>
 <!-- rnb-source-end -->
@@ -426,10 +456,16 @@ First 10 features:
 <p><br />
 </p>
 </div>
-<div id="project-it-to-utm-11n" class="section level2">
-<h2>3) Project it to UTM 11N</h2>
+<div id="project-the-missing-persons-layer-to-utm-11n-nad83" class="section level2">
+<h2>3) Project the missing persons layer to UTM 11N (NAD83)</h2>
+<p><a href="https://bit.ly/3wJ46lJ">Hint</a>. <a href="https://bit.ly/3wmhGv6">Answer</a></p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZXBzZ191dG0xMW5fbmFkODMgPC0gMjY5MTFcbnlvc2VfbWlzc19waXBzX3V0bTExbl9zZiA8LSBtaXNzX3BpcHNfc2YgJT4lIFxuICBzdF90cmFuc2Zvcm0oZXBzZ191dG0xMW5fbmFkODMpXG5gYGAifQ== -->
+<pre class="r"><code>epsg_utm11n_nad83 &lt;- 26911
+yose_miss_pips_utm11n_sf &lt;- miss_pips_sf %&gt;% 
+  st_transform(epsg_utm11n_nad83)</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p><br />
@@ -437,14 +473,27 @@ First 10 features:
 </div>
 <div id="save-as-geojson" class="section level2">
 <h2>4) Save as GeoJSON</h2>
+<p>You can save a spatial object to disk with <code>st_write()</code>. R will figure out what format to use based on the file name extension.</p>
+<p>Save the Missing Persons layer as GeoJSON: <a href="https://bit.ly/3wb8KcM">Answer</a></p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3Rfd3JpdGUoeW9zZV9taXNzX3BpcHNfdXRtMTFuX3NmLCBcInlvc2VfbWlzc19waXBzLmdlb2pzb25cIilcbmBgYCJ9 -->
+<pre class="r"><code>st_write(yose_miss_pips_utm11n_sf, &quot;yose_miss_pips.geojson&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTGF5ZXIgeW9zZV9taXNzX3BpcHMgaW4gZGF0YXNldCB5b3NlX21pc3NfcGlwcy5nZW9qc29uIGFscmVhZHkgZXhpc3RzOlxudXNlIGVpdGhlciBhcHBlbmQ9VFJVRSB0byBhcHBlbmQgdG8gbGF5ZXIgb3IgYXBwZW5kPUZBTFNFIHRvIG92ZXJ3cml0ZSBsYXllclxuIn0= -->
+<pre><code>Layer yose_miss_pips in dataset yose_miss_pips.geojson already exists:
+use either append=TRUE to append to layer or append=FALSE to overwrite layer</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gQ1BMX3dyaXRlX29ncihvYmosIGRzbiwgbGF5ZXIsIGRyaXZlciwgYXMuY2hhcmFjdGVyKGRhdGFzZXRfb3B0aW9ucyksICA6IFxuICBEYXRhc2V0IGFscmVhZHkgZXhpc3RzLlxuIn0= -->
+<pre><code>Error in CPL_write_ogr(obj, dsn, layer, driver, as.character(dataset_options),  : 
+  Dataset already exists.</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIk1hbmlwdWxhdGUgYSBTaW1wbGUgRmVhdHVyZSBEYXRhIEZyYW1lIg0Kb3V0cHV0OiANCiAgaHRtbF9ub3RlYm9vazoNCiAgICB0b2M6IHllcw0KICAgIHRvY19mbG9hdDogeWVzDQotLS0NCg0KIyMgSW50cm9kdWN0aW9uDQoNCkluIHRoaXMgTm90ZWJvb2sgeW91J2xsIHByYWN0aWNlIGltcG9ydGluZyBzb21lIHRhYnVsYXIgZGF0YSBpbiB0byBSLCBjb252ZXJ0aW5nIGl0IHRvIGEgc2ltcGxlIGZlYXR1cmUgZGF0YSBmcmFtZSwgcHJvamVjdGluZyBpdCwgYW5kIHNhdmluZyBpdCB0byBkaXNrIGFzIGEgR2VvSlNPTiBmaWxlLg0KDQpcDQoNCiMjIDEpIEltcG9ydCB0aGUgbWlzc2luZyBwZXJzb25zIENTViBmaWxlOg0KDQpgYGB7ciBjaHVuazAxfQ0KbWlzc19waXBzX2RmIDwtIHJlYWQuY3N2KCIuL2RhdGEveW9zZW1pdGVfbWlzc2luZ19wZW9wbGUuY3N2Iiwgc3RyaW5nc0FzRmFjdG9ycyA9IEZBTFNFKQ0KDQpoZWFkKG1pc3NfcGlwc19kZikNCiMgVmlldyhtaXNzaW5nX3BpcHNfZGYpDQpgYGANCg0KXA0KDQojIyAyKSBDb252ZXJ0IHRoZSBkYXRhIGZyYW1lIHRvIGEgc2ltcGxlIGZlYXR1cmUgZGF0YSBmcmFtZQ0KDQpGb3IgY29udmVuaWVuY2UsIGhlcmUgYXJlIHNvbWUgRVBTRyBudW1iZXJzOg0KDQpgYGB7ciBjaHVuazAyfQ0KIyMgU29tZSBjb21tb24gZXBzZyBudW1iZXJzIGluIENhbGlmb3JuaWENCmVwc2dfZ2VvX3dnczg0IDwtIDQzMjYgICAgICAgIyMgR2VuZXJhbCBsb25nLWxhdA0KZXBzZ19nZW9fbmFkODMgPC0gNDI2OSAgICAgICAjIyBHZW5lcmFsIGxvbmctbGF0ICAgDQplcHNnX3V0bTEwbl93Z3M4NCA8LSAzMjYxMA0KZXBzZ191dG0xMW5fd2dzODQgPC0gMzI2MTEgICAjIyB1c2UgdGhpcyBvbmUgZm9yIFlOUA0KZXBzZ191dG0xMG5fbmFkODMgPC0gMjY5MTANCmVwc2dfdXRtMTFuX25hZDgzIDwtIDI2OTExDQplcHNnX3dlYm1lcmMgPC0gMzg1Nw0KZXBzZ19jYWFsYmVycyA8LSAzMzEwDQpgYGANCg0KDQpgYGB7ciBjaHVuazAzfQ0KbGlicmFyeShzZikNCg0KbWlzc19waXBzX3NmIDwtIHN0X2FzX3NmKG1pc3NfcGlwc19kZiwgY29vcmRzID0gYygiTG9uZyIsICJMYXQiKSwgY3JzID0gZXBzZ19nZW9fd2dzODQpICU+JSANCiAgZHBseXI6OnNlbGVjdChUeXBlLCBDYXNlTnVtYmVyLCBJbmNpZFllYXIsIENvbnRhY3RNZXQsIEluY2lkVHlwZSwgTnVtYmVyb2ZTdSwgR3JvdXBEeW5hbSwgU3ViamVjdENhdCwgDQogICAgICAgICBTdWJTZXgsIFN1YkFnZSwgSW5jaWRDb250ciwgU2NlbmFyaW8sIFJlc2N1ZU1ldGgsIEluY2lkZW50X04sIEZvdW5kX0dSX04pDQoNCm1pc3NfcGlwc19zZg0KYGBgDQoNClwNCg0KIyMgMykgUHJvamVjdCBpdCB0byBVVE0gMTFODQoNCmBgYHtyIGNodW5rMDR9DQoNCmBgYA0KDQpcDQoNCiMjIDQpIFNhdmUgYXMgR2VvSlNPTg0KDQpgYGB7ciBjaHVuazA1fQ0KDQpgYGANCg0KDQoNCg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIk1hbmlwdWxhdGUgYSBTaW1wbGUgRmVhdHVyZSBEYXRhIEZyYW1lIg0Kb3V0cHV0OiANCiAgaHRtbF9ub3RlYm9vazoNCiAgICB0b2M6IHllcw0KICAgIHRvY19mbG9hdDogeWVzDQotLS0NCg0KIyMgSW50cm9kdWN0aW9uDQoNCkluIHRoaXMgTm90ZWJvb2sgeW91J2xsIHByYWN0aWNlIGltcG9ydGluZyBzb21lIHRhYnVsYXIgZGF0YSBpbiB0byBSLCBjb252ZXJ0aW5nIGl0IHRvIGEgc2ltcGxlIGZlYXR1cmUgZGF0YSBmcmFtZSwgcHJvamVjdGluZyBpdCwgYW5kIHNhdmluZyBpdCB0byBkaXNrIGFzIGEgR2VvSlNPTiBmaWxlLg0KDQpcDQoNCiMjIDEpIEltcG9ydCB0aGUgbWlzc2luZyBwZXJzb25zIENTViBmaWxlOg0KDQpgYGB7ciBjaHVuazAxfQ0KbWlzc19waXBzX2RmIDwtIHJlYWQuY3N2KCIuL2RhdGEveW9zZW1pdGVfbWlzc2luZ19wZW9wbGUuY3N2Iiwgc3RyaW5nc0FzRmFjdG9ycyA9IEZBTFNFKQ0KDQpoZWFkKG1pc3NfcGlwc19kZikNCiMgVmlldyhtaXNzX3BpcHNfZGYpDQpgYGANCg0KXA0KDQpMZXQncyByZWR1Y2UgdGhlIG51bWJlciBvZiBjb2x1bW5zOg0KDQpgYGB7ciBjaHVuazAyfQ0KbGlicmFyeShkcGx5cikNCg0KbWlzc19waXBzX3RoaW5fZGYgPC0gbWlzc19waXBzX2RmICU+JSANCiAgc2VsZWN0KExvbmcsIExhdCwgVHlwZSwgQ2FzZU51bWJlciwgSW5jaWRZZWFyLCBDb250YWN0TWV0LCBJbmNpZFR5cGUsIE51bWJlcm9mU3UsIEdyb3VwRHluYW0sIA0KICAgICAgICAgU3ViamVjdENhdCwgU3ViU2V4LCBTdWJBZ2UsIEluY2lkQ29udHIsIFNjZW5hcmlvLCBSZXNjdWVNZXRoLCBJbmNpZGVudF9OLCBGb3VuZF9HUl9OKQ0KDQpoZWFkKG1pc3NfcGlwc190aGluX2RmKQ0KYGBgDQoNClwNCg0KIyMgMikgQ29udmVydCB0aGUgZGF0YSBmcmFtZSB0byBhIHNpbXBsZSBmZWF0dXJlIGRhdGEgZnJhbWUNCg0KRm9yIGNvbnZlbmllbmNlLCBoZXJlIGFyZSBzb21lIEVQU0cgbnVtYmVyczoNCg0KYGBge3IgY2h1bmswM30NCmVwc2dfZ2VvX3dnczg0IDwtIDQzMjYgICAgICAgIyMgR2VuZXJhbCBsb25nLWxhdA0KZXBzZ191dG0xMW5fbmFkODMgPC0gMjY5MTEgICAjIyB1c2UgdGhpcyBvbmUgZm9yIFlOUA0KYGBgDQoNCkNvbnZlcnQgYSBkYXRhIGZyYW1lIHRvIGEgc3BhdGlhbCBvYmplY3Qgd2l0aCBgc3RfYXNfc2YoKWAuIFlvdSBoYXZlIHRvIHNwZWNpZnkgdGhlIG5hbWVzIG9mIHRoZSBjb2x1bW5zIHRoYXQgY29udGFpbiB0aGUgY29vcmRpbmF0ZXMsIGFuZCB0aGUgRVBTRyBudW1iZXIgb2YgdGhlIGNvb3JkaW5hdGVzLg0KDQpgYGB7ciBjaHVuazA0fQ0KbGlicmFyeShzZikNCg0KbWlzc19waXBzX3NmIDwtIHN0X2FzX3NmKG1pc3NfcGlwc190aGluX2RmLCANCiAgICAgICAgICAgICAgICAgICAgICAgICBjb29yZHMgPSBjKCJMb25nIiwgIkxhdCIpLCANCiAgICAgICAgICAgICAgICAgICAgICAgICBjcnMgPSBlcHNnX2dlb193Z3M4NCkgDQoNCm1pc3NfcGlwc19zZg0KYGBgDQoNClwNCg0KIyMgMykgUHJvamVjdCB0aGUgbWlzc2luZyBwZXJzb25zIGxheWVyIHRvIFVUTSAxMU4gKE5BRDgzKQ0KDQpbSGludF0oaHR0cHM6Ly9iaXQubHkvM3dKNDZsSikuIFtBbnN3ZXJdKGh0dHBzOi8vYml0Lmx5LzN3bWhHdjYpDQoNCmBgYHtyIGNodW5rMDV9DQplcHNnX3V0bTExbl9uYWQ4MyA8LSAyNjkxMQ0KeW9zZV9taXNzX3BpcHNfdXRtMTFuX3NmIDwtIG1pc3NfcGlwc19zZiAlPiUgDQogIHN0X3RyYW5zZm9ybShlcHNnX3V0bTExbl9uYWQ4MykNCmBgYA0KDQpcDQoNCiMjIDQpIFNhdmUgYXMgR2VvSlNPTg0KDQpZb3UgY2FuIHNhdmUgYSBzcGF0aWFsIG9iamVjdCB0byBkaXNrIHdpdGggYHN0X3dyaXRlKClgLiBSIHdpbGwgZmlndXJlIG91dCB3aGF0IGZvcm1hdCB0byB1c2UgYmFzZWQgb24gdGhlIGZpbGUgbmFtZSBleHRlbnNpb24uIA0KDQpTYXZlIHRoZSBNaXNzaW5nIFBlcnNvbnMgbGF5ZXIgYXMgR2VvSlNPTjogW0Fuc3dlcl0oaHR0cHM6Ly9iaXQubHkvM3diOEtjTSkNCg0KYGBge3IgY2h1bmswNn0NCnN0X3dyaXRlKHlvc2VfbWlzc19waXBzX3V0bTExbl9zZiwgInlvc2VfbWlzc19waXBzLmdlb2pzb24iKQ0KYGBgDQoNCg==</div>
 
 
 </div>
