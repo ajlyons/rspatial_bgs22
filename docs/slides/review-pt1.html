@@ -236,14 +236,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Session 1 Review <br/><img src='images/computer_review_414x300.png'/>
   </p>
 </div>
-<div class="slide section level1">
-
+<div id="highlights-from-last-time" class="slide section level1">
+<h1>Highlights From Last Time</h1>
 <script>
   addKlippy('left', 'top', 'auto', '1', 'Copy code', 'Copied!');
 </script>
-</div>
-<div id="highlights-from-last-time" class="slide section level1">
-<h1>Highlights From Last Time</h1>
 <h2 id="good-coding-practices">Good Coding Practices</h2>
 <div class="indented2">
 <p><strong>RStudio</strong> is a great IDE</p>
@@ -259,7 +256,7 @@ Session 1 Review <br/><img src='images/computer_review_414x300.png'/>
 </div>
 <p><br />
 </p>
-<h2 id="packages"><a href="packages.html">Packages</a></h2>
+<h2 id="packages"><a href="packages.html" target="_blank" rel="noopener">Packages</a></h2>
 <div class="indented2">
 <p><strong>packages</strong> are the key to productivity with R</p>
 <p>packages mainly provide additional <strong>functions</strong> (and sometimes <strong>data</strong>)</p>
@@ -271,7 +268,16 @@ Session 1 Review <br/><img src='images/computer_review_414x300.png'/>
 </div>
 <p><br />
 </p>
-<h2 id="importing-and-plotting-vector-data"><a href="importing-vector.html">Importing and Plotting Vector Data</a></h2>
+<h2 id="functions"><a href="syntax.html#(9)" target="_blank" rel="noopener">Functions</a></h2>
+<div class="indented2">
+<p>Most functions expect <strong>arguments</strong></p>
+<p>Arguments can be <strong>unnamed</strong> if you pass them in the right order</p>
+<p>Arguments with a default value are <strong>optional</strong></p>
+<p>All functions have <strong>help pages</strong></p>
+</div>
+<p><br />
+</p>
+<h2 id="importing-and-plotting-vector-data"><a href="importing-vector.html" target="_blank" rel="noopener">Importing and Plotting Vector Data</a></h2>
 <div class="indented2">
 <p><code>sf</code> is the primary package for importing and manipulating vector spatial data</p>
 <p>simple feature data frames are essentially regular data frames with a <strong>‘geometry’</strong> column</p>
@@ -336,6 +342,10 @@ Session 1 Review <br/><img src='images/computer_review_414x300.png'/>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span>(temp_fn, <span class="at">exdir =</span> <span class="st">&quot;.&quot;</span>); <span class="fu">unlink</span>(temp_fn)</span></code></pre></div>
 </div>
 <p>Look in the ‘Files’ pane to make sure they’re there!</p>
+<p><br />
+</p>
+<h2 id="warm-up-exercise">Warm-up Exercise</h2>
+<p><p><a href='https://raw.githubusercontent.com/ajlyons/rspatial_bgs22/main/docs/notebooks/nb_session02_warmup.Rmd' target='_blank'>nb_session02_warmup.Rmd</a></p> <div class='nb_desc'>Warmup exercise for Session 2 - import and plot some vector data</div> <p style='font-size:80%;'><a href='https://ajlyons.github.io/rspatial_bgs22/notebooks/nb_session02_warmup.nb.html' target='_blank' rel='noopener' style='color:#8993d3;'>preview notebook</a> | <a href='https://ajlyons.github.io/rspatial_bgs22/notebooks/nb_session02_warmup_ans.nb.html' target='_blank' style='color:#8993d3;'>answer key</a></p></p>
 <p>
 <br/>
 <hr/>

@@ -1,0 +1,70 @@
+---
+title: "Manipulate a Simple Feature Data Frame"
+output: 
+  html_notebook:
+    toc: yes
+    toc_float: yes
+---
+
+## Introduction
+
+In this Notebook you'll practice importing some tabular data in to R, converting it to a simple feature data frame, projecting it, and saving it to disk as a GeoJSON file.
+
+\
+
+## 1) Import the missing persons CSV file:
+
+```{r chunk01}
+miss_pips_df <- read.csv("./data/yosemite_missing_people.csv", stringsAsFactors = FALSE)
+
+head(miss_pips_df)
+# View(missing_pips_df)
+```
+
+\
+
+## 2) Convert the data frame to a simple feature data frame
+
+For convenience, here are some EPSG numbers:
+
+```{r chunk02}
+## Some common epsg numbers in California
+epsg_geo_wgs84 <- 4326       ## General long-lat
+epsg_geo_nad83 <- 4269       ## General long-lat   
+epsg_utm10n_wgs84 <- 32610
+epsg_utm11n_wgs84 <- 32611   ## use this one for YNP
+epsg_utm10n_nad83 <- 26910
+epsg_utm11n_nad83 <- 26911
+epsg_webmerc <- 3857
+epsg_caalbers <- 3310
+```
+
+
+```{r chunk03}
+library(sf)
+
+miss_pips_sf <- st_as_sf(miss_pips_df, coords = c("Long", "Lat"), crs = epsg_geo_wgs84) %>% 
+  dplyr::select(Type, CaseNumber, IncidYear, ContactMet, IncidType, NumberofSu, GroupDynam, SubjectCat, 
+         SubSex, SubAge, IncidContr, Scenario, RescueMeth, Incident_N, Found_GR_N)
+
+miss_pips_sf
+```
+
+\
+
+## 3) Project it to UTM 11N
+
+```{r chunk04}
+
+```
+
+\
+
+## 4) Save as GeoJSON
+
+```{r chunk05}
+
+```
+
+
+
