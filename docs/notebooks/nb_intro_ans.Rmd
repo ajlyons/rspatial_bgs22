@@ -20,12 +20,12 @@ Keyboard shortcuts:
 
 # Run Code
 
-```{r}
+```{r chunk01}
 x = "Hello World!"
 x
 ```
 
-```{r}
+```{r chunk02}
 LETTERS[1:5]
 ```
 
@@ -33,7 +33,7 @@ LETTERS[1:5]
 
 Compute the product of the numbers from 1 to 5. [Answer](https://bit.ly/3rnlOaY)
 
-```{r}
+```{r chunk03}
 1 * 2 * 3 * 4 * 5
 
 ## or factorial(5)
@@ -43,7 +43,7 @@ Compute the product of the numbers from 1 to 5. [Answer](https://bit.ly/3rnlOaY)
 
 Run the following:
 
-```{r}
+```{r chunk04}
 ## Plot a cosine wave
 xvals = 4 * pi * (0:100)/100
 plot(x = xvals, y = cos(xvals), type = "b")
@@ -53,7 +53,7 @@ plot(x = xvals, y = cos(xvals), type = "b")
 
 Plot a sine wave [Answer](https://bit.ly/36NPmp2)
 
-```{r}
+```{r chunk05}
 xvals = 4 * pi * (0:100)/100
 plot(x = xvals, y = sin(xvals), type = "b")
 ```
@@ -62,7 +62,7 @@ plot(x = xvals, y = sin(xvals), type = "b")
 
 Run the following lines all at once:
 
-```{r}
+```{r chunk06}
 ## Plot the batman logo
 f1u <- function(x) ifelse ((abs(x) >  3 & abs(x) <= 7), 3*sqrt(1-(x/7)^2), 0)
 f1d <- function(x) ifelse ((abs(x) >= 4 & abs(x) <= 7), -3*sqrt(1-(x/7)^2), 0)
@@ -81,7 +81,7 @@ par(opar)
 
 # View the Attendee Map
 
-```{r}
+```{r chunk07}
 library(googlesheets4)
 library(sf)
 library(leaflet)
