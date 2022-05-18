@@ -1,0 +1,173 @@
+---
+title: "Wrangling 2D Data with dplyr"
+output: 
+  html_notebook:
+    toc: yes
+    toc_float: yes
+---
+
+`dplyr` is a package for manipulating data frames, including subsetting rows and columns, sorting rows, adding new columns, grouping rows, joins, etc.
+
+In this notebook we'll practice using the `dplyr` package.
+
+## Set preferences with `conflicted`
+
+Several `dplyr` functions have very generic names. To avoid potential conflicts with functions from  other packages, we'll start by stating our preferences using the conflicted package:
+
+```{r chunk01}
+library(dplyr)
+
+## Load the conflicted package
+library(conflicted)
+
+# Set conflict preferences
+conflict_prefer("filter", "dplyr", quiet = TRUE)
+conflict_prefer("count", "dplyr", quiet = TRUE)
+conflict_prefer("select", "dplyr", quiet = TRUE)
+conflict_prefer("arrange", "dplyr", quiet = TRUE)
+```
+
+Remember the iris data frame? How many rows does iris have? 
+
+```{r chunk02}
+nrow(iris)
+```
+
+## Filter rows with `filter()`
+
+Write an expression that returns just those rows where Sepal.Length > 7:
+
+```{r chunk03}
+# Select rows where Sepal.Length > 7
+iris %>% filter(Sepal.Length > 7)
+```
+
+Add another criteria specifying the species has to be `virginica`:
+
+HINT: remember to use '==' to test for equality
+
+```{r chunk04}
+iris %>% filter(Sepal.Length > 7, Species=="virginica")
+```
+
+## CHALLENGE: Filter
+
+Write an expression that will return rows where the Petal.Length is between 4.1 and 4.4. [Answer](https://bit.ly/3tNPVIH)
+
+```{r chunk05}
+iris %>% filter(Petal.Length >= 4.1, Petal.Length <= 4.4)
+
+## This also works:
+## iris %>% filter(Petal.Length >= 4.1 & Petal.Length <= 4.4)
+```
+
+## Filter rows with `slice()`
+
+Sometimes you want to fliter rows by row number, rather than an attribute column. You can do that with `slice()`.
+
+Show the first 10 rows from iris:
+
+```{r chunk06}
+iris %>% slice(1:10)
+```
+
+## Filter columns with `select()`
+
+To get a subset of columns, or if you want the columns in a different order, include the `select()` function in your expression.
+
+For example if you only want the `Sepal.Length` and `Sepal.Width` columns, you could run:
+
+```{r chunk07}
+iris %>% 
+  filter(Sepal.Length > 7) %>% 
+  select(Sepal.Length, Sepal.Width, Species)
+```
+
+## Sort rows with `arrange()`
+
+Add `arrange()` to your expression to sort rows. For example to sort the last expression by `Sepal.Width` we simply add one more piece to the expression:
+
+```{r chunk08}
+iris %>% 
+  filter(Sepal.Length > 7) %>% 
+  select(Sepal.Length, Sepal.Width, Species) %>% 
+  arrange(Sepal.Width)
+```
+
+To sort rows in descending order, wrap the field name in `desc()`:
+
+```{r chunk09}
+iris %>% 
+  filter(Sepal.Length > 7) %>% 
+  select(Sepal.Length, Sepal.Width, Species) %>% 
+  arrange(desc(Sepal.Width))
+```
+
+## CHALLENGE: Top-n Values
+
+Write an expression that returns the top-5 Petal Lengths (all species)
+
+Hint: there are a couple of ways to do this. Look at the dplyr [Cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf) for inspiration. [Answer](https://bit.ly/3d9rVsS)
+
+```{r chunk10}
+## Option 1
+iris %>% 
+  arrange(desc(Petal.Length)) %>% 
+  slice(1:5)
+
+## Option 2
+iris %>% top_n(5, Petal.Length)
+```
+
+## Create a new column with `mutate()`
+
+Create a new column which contains the product of the Sepal Length and Petal Length. 
+
+```{r chunk11}
+iris %>% mutate(sepal_petal_product = Sepal.Length * Petal.Length)
+```
+
+## CHALLENGE: Filter on Multiple Columns
+
+Write an expression from the `quakes` data frame that:
+
+- returns the lat, long, and mag columns  
+- only return quakes that are i) north of 20 degrees South, and ii) larger than magnitude 5.0. 
+- sorts the rows by magnitude
+
+Hint: Fiji is south of the equator. [Answer](https://bit.ly/3fdflLR)
+
+```{r chunk12}
+quakes %>% 
+  filter(lat > -20, mag > 5.0) %>% 
+  select(lat, long, mag) %>% 
+  arrange(mag)
+```
+
+## Group and Summarize Rows
+
+You can 'group' rows using `group_by()`. By itself, grouping rows doesn't do much. Usually you follow `group_by()` with summarise() which creates some kind of summary for each group.
+
+Example: for each Species in iris, compute the mean petal length and width
+
+```{r chunk13}
+iris %>% group_by(Species) %>% 
+  summarise(avg_petal_length = mean(Petal.Length), avg_petal_width = mean(Petal.Width))
+```
+
+## CHALLENGE: Group and Summarise
+
+For each species in iris, compute the minimum and maximum sepal length. [Answer](https://bit.ly/2UthlaT)
+
+```{r chunk14}
+iris %>% group_by(Species) %>% 
+  summarise(min_sep_len = min(Sepal.Length), max_sep_len = max(Sepal.Length))
+```
+
+## End
+
+Congratulations, you have completed the Notebook! 
+
+To view your Notebook at HTML, save it (again), then click the 'Preview' button in the RStudio toolbar.
+
+

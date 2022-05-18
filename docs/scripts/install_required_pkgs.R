@@ -7,13 +7,16 @@ pkgs_req <- c("sp", "tmap", "tmaptools", "leaflet", "ggmap", "maptools",
               "RColorBrewer", "raster", "maps", "tidyverse",  "jsonlite", 
               "rasterVis", "GISTools", "nngeo", "lwgeom", "remotes", 
               "conflicted", "tigris", "tidycensus", "stars",
-              "googlesheets4", "httr", "rjson", "RSocrata", "usethis", "rinat")
+              "googlesheets4", "httr", "rjson", "RSocrata", "usethis", "rinat",
+              "ggspatial", "wrkshputils")
 
 ## See which ones are missing
 (pkgs_missing <- pkgs_req[!(pkgs_req %in% installed.packages()[,"Package"])])
 
 ## Install missing ones
-if (length(pkgs_missing)) install.packages(pkgs_missing, dependencies=TRUE)
+if (length(pkgs_missing)) install.packages(pkgs_missing, dependencies=TRUE,
+                                           repos = c('https://cloud.r-project.org', 
+                                                     'https://ajlyons.r-universe.dev'))
 
 ## Re-run the check for missing packages
 pkgs_missing <- pkgs_req[!(pkgs_req %in% installed.packages()[,"Package"])]
