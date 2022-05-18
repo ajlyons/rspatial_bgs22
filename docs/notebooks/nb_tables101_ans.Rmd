@@ -1,0 +1,196 @@
+---
+title: "Data Frames 101"
+output: 
+  html_notebook:
+    toc: yes
+    toc_float: yes
+---
+
+In this Notebook, we'll practice working with data frames including:
+
+- using the built-in sample data frames that come with base R 
+- importing a csv file   
+- viewing the properties of a data frame  
+- grabbing individual columns  
+- filtering rows and columns with square bracket notation  
+- sorting rows  
+
+## Sample Data Frames
+
+R comes with several sample data frames, for example `mtcars`.
+
+```{r chunk01}
+mtcars
+```
+
+Wondering where the `mtcars` data came from? Just like functions, sample datasets usually have their help pages. Run `?mtcars` to see where this one came from.
+
+## Importing a CSV file
+
+csv (comma separated values) is a common format for tabular data. You can import a csv file using base R with  `read.csv()`. 
+
+Import *sf_libraries.csv* in the data directory:  
+
+```{r chunk02}
+csv_fn <- "./data/ca_breweries.csv"
+file.exists(csv_fn)
+breweries_df <- read.csv(csv_fn)
+head(breweries_df)
+```
+
+## Viewing the Properties of a Data Frame
+
+You can view the number of **rows** and **columns** of a dataframe with `nrow()` and `ncol()`:
+
+```{r chunk03}
+nrow(breweries_df)
+ncol(mtcars)
+```
+You can view the **names** of the columns in a data frame with names():
+
+```{r chunk04}
+names(mtcars)
+```
+
+The tibble package has a nice function called `glimpse()` that will show you the names, column types, and first few values for each column in a concise format:
+
+```{r chunk05}
+tibble::glimpse(mtcars)
+```
+
+## Grabbing Columns
+
+You can grab a single column using the `$` operator. 
+
+Extract the values in the mpg column:
+
+```{r chunk06}
+mtcars$mpg
+```
+
+\
+
+## CHALLENGE: Compute the average mpg 
+
+Compute the average mpg of vehicles in mtcars. [Answer](http://bit.ly/310o8bW)
+
+```{r chunk07}
+mean(mtcars$mpg)
+```
+
+\
+
+## CHALLENGE: Summarize quakes data frame
+
+Answer the following questions about the `quakes` data frame, which has data about some earthquakes: [Answer](http://bit.ly/3eUoyIV)
+
+1) How many rows and columns does it contain?  
+2) What is the average magnitude of the earthquakes recorded in this data frame?  
+3) What is the minimum and maximum latitude and longitude of the earthquakes in this dataset? (hint: look at the `range()` function)  
+4) In which year was the earliest earthquake recorded?  
+
+```{r chunk08}
+dim(quakes)
+mean(quakes$mag)
+range(quakes$lat)
+range(quakes$long)
+
+# View the help page for this data set with 
+# ?quakes
+# "The events occurred in a cube near Fiji since 1964."
+```
+
+## Filtering rows and columns
+
+You can filter (subset) rows and columns using square bracket notation. Example:
+
+`my_df[rows-expression, cols-expression]`
+
+To view the first 5 rows of `breweries_df`, we pass a vector of integers as the rows expression:
+
+```{r chunk09}
+quakes[1:5, ]
+```
+
+NOTE: You can omit the rows-expression or cols-expression, but you still need a comma instead the square brackets.
+
+View every 5th row in quakes:
+
+```{r chunk10}
+quakes[ c(5, 10, 15, 20, 25), ]
+```
+
+To return rows that meet a certain condition, *rows* can be an expression that returns TRUE/FALSE values:
+
+```{r chunk11}
+## Quakes whose magnitude was >= 5.9
+quakes[ quakes$mag >= 5.9,  ]
+```
+
+\
+
+## CHALLENGE: How many quakes?
+
+How many earthquakes were detected by 100 or more stations? [Answer](http://bit.ly/3s51wTq)
+
+```{r chunk12}
+quakes[ quakes$stations >= 100,  ]
+sum(quakes$stations >= 100)
+```
+
+\
+
+## CHALLENGE: Largest earthquake
+
+What was the largest earthquake on record? [Answer](http://bit.ly/391H7Hs)
+
+```{r chunk13}
+max(quakes$mag)
+```
+
+## Sorting Rows
+
+You can also use the rows expression to sort the rows. The key to this is using `order()`, which returns the indices of elements in a vector sorted:
+
+```{r chunk14}
+x <- c(50, 20, 70, 40, 90)
+x
+order(x)
+```
+
+To sort rows in a data frame, we simply pass a vector of integers in the desired order:
+
+```{r chunk15}
+quakes[ order(quakes$mag), ]
+```
+
+
+The *cols-expression* can be vector of integers (corresponding to column numbers you want returned), or a character vector containing column names. You can also use the cols-expression to reorder the columns.
+
+Write an expression that will return the longitude and latitude columns only (in that order) for the biggest 10 earthquakes (by magnitude).
+
+```{r chunk16}
+mag_topten_idx <- order(quakes$mag, decreasing = TRUE)[1:10]
+quakes[mag_topten_idx, ]
+```
+
+\
+
+## CHALLENGE: Compute MPG
+
+Using the mtcars data frame, compute the average mpg for 4, 6, and 8 cylinder vehicles. [Answer](http://bit.ly/3s6meSL)
+
+```{r chunk17}
+## 4 cylinder
+mean(mtcars[ mtcars$cyl == 4, "mpg" ])
+
+## 6 cylinder
+mean(mtcars[ mtcars$cyl == 6, "mpg" ])
+
+## 8 cylinder
+mean(mtcars[ mtcars$cyl == 8, "mpg" ])
+
+```
+
+
+
