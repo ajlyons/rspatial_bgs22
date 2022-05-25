@@ -1,0 +1,229 @@
+---
+title: "Mapping with ggplot"
+output: html_notebook
+---
+
+In this notebook, we test out some methods for mapping with ggplot:
+
+# Load packages and set preferences
+
+```{r}
+library(sf)
+library(dplyr)
+library(ggplot2)
+library(tmap)
+
+## Load the conflicted package
+library(conflicted)
+conflict_prefer("filter", "dplyr", quiet = TRUE)
+conflict_prefer("count", "dplyr", quiet = TRUE)
+conflict_prefer("select", "dplyr", quiet = TRUE)
+conflict_prefer("arrange", "dplyr", quiet = TRUE)
+```
+
+\
+
+# Load spatial data
+
+Define some constants:
+
+```{r}
+epsg_geo_wgs84 <- 4326       ## General long-lat
+```
+
+\
+
+# Import Some SF data
+
+```{r}
+## City boundary
+sf_citybnd_ll <- st_read(dsn = file.path(data_dir, "sf_citybnd.geojson"))
+sf_citybnd_ll
+
+## City neighborhoods
+sf_nb_ll <- st_read(dsn = file.path(data_dir, "sf_nb.geojson"))
+sf_nb_ll
+```
+
+\
+
+## Making maps with ggplot
+
+Plot the city boundary:
+
+```{r}
+ggplot(sf_citybnd_ll) + geom_sf()
+```
+
+\
+
+Add the neighborhood boundaries:
+
+```{r}
+ggplot(sf_citybnd_ll) + geom_sf(lwd=1.2) +
+  geom_sf(data = sf_nb_ll, aes(fill = nhood))
+```
+
+\
+
+Get rid of the legend and add a tile:
+
+```{r}
+ggplot(sf_citybnd_ll) + geom_sf(lwd=1.2) +
+  geom_sf(data = sf_nb_ll, aes(fill = nhood)) +
+  theme(legend.position="none") +
+  ggtitle("San Francisco Neighborhoods")
+```
+
+\
+
+Add a scale bar and compass (complements of ggspatial):
+
+```{r}
+library("ggspatial")
+ggplot(sf_citybnd_ll) + geom_sf(lwd=1.2) +
+  geom_sf(data = sf_nb_ll, aes(fill = nhood)) +
+  theme(legend.position="none") +
+  ggtitle("San Francisco Neighborhoods") +
+  annotation_scale(location = "tl", width_hint = 0.5) +
+  annotation_north_arrow(location = "tl", which_north = "true", 
+                         pad_x = unit(0, "in"), pad_y = unit(0.4, "in"),
+                         style = north_arrow_fancy_orienteering) 
+
+```
+
+\
+
+Add a basemap from Open Street Map:
+
+Note: Zoom determines the amount of detail in the background map. It can vary from 1 (entire world) to 20 (an individual building). For a city, look for Zoom in the range of 10-12.
+
+```{r}
+ggplot(sf_citybnd_ll) + geom_sf(lwd=1.2) +
+  annotation_map_tile(type = "osm", zoom = 12) +
+  geom_sf(data = sf_nb_ll, col = "navy", fill = NA, lwd = 1.1) +
+  ggtitle("San Francisco Neighborhoods")
+```
+
+\
+
+Other OSM maps you can use:
+
+```{r}
+rosm::osm.types()
+```
+
+YOUR TURN: Try a different base map:
+
+```{r}
+ggplot(sf_citybnd_ll) + geom_sf(lwd=1.2) +
+  annotation_map_tile(type = "stamenbw", zoom = 12) +
+  geom_sf(data = sf_nb_ll, col = "navy", fill = NA, lwd = 1.1) +
+  ggtitle("San Francisco Neighborhoods")
+
+```
+
+\
+
+You can also 'zoom in' by adding `coord_sf()`. For example to zoom into BayView Hunters Point:
+
+```{r}
+ggplot(sf_citybnd_ll) + geom_sf(lwd=1.2) +
+  annotation_map_tile(type = "osm", zoom = 14) +
+  geom_sf(data = sf_nb_ll, col = "navy", lwd=1.1,  fill = NA) +
+  coord_sf(xlim = c(-122.41, -122.35), ylim = c(37.7, 37.76)) +
+  ggtitle("Bayview Hunters Point")
+
+```
+
+
+
+
+
+
+
+# Heat Map!
+
+## Import 311 calls
+
+Overlay the 311 calls for street and sidewalk general cleaning:
+
+```{r}
+## City neighborhoods
+sf_gencln_ll <- st_read(dsn = file.path(data_dir, "sf_311_strt-sdwk-gncln_2015-21.gpkg"))
+## sf_gencln_ll <- st_read(dsn = "./data/sf_311_strt-sdwk-gncln_2015-21.gpkg")
+dim(sf_gencln_ll)
+```
+
+\
+
+496,000 is a lot of points for a map. Let's plot the first 5,000:
+
+```{r}
+ggplot(sf_citybnd_ll) + geom_sf(lwd=1.2, col = "dimgray") +
+  geom_sf(data = sf_gencln_ll %>% slice(1:5000), cex = 0.5)
+
+```
+
+## Make a heatmap!
+
+To view all the points, we're better off using a "heatmap" visualization.
+
+A 'heatmap' is actually a Kernel Density Estimator (raster). We have two options here:
+
+1) Create the KDE on our own, using SpatialKDE or MASS, or AdehabitatHR, and then display it in ggplot (or tmap) as a raster.
+
+2) Use ggplot's geom_density_2d_filled() function, which generates a KDE on the fly
+
+We'll go with Option #2. The only issue here is that `geom_density_2d_filled()` doesn't know how to deal with sf objects. It wants a data frame. So we'll give it a data frame:
+
+```{r}
+sf_gencln_df <- sf_gencln_ll %>% st_coordinates() %>% as.data.frame()
+sf_gencln_df %>% dim()
+sf_gencln_df %>% head()
+```
+
+\
+
+To speed up our experimentation, we'll use `sample_n()` to take 20,000 random samples.
+
+
+```{r}
+sf_gencln_samp_df <- sf_gencln_df %>% sample_n(20000)
+sf_gencln_samp_df %>% glimpse ()
+```
+
+
+```{r}
+ggplot(sf_citybnd_ll) + geom_sf(lwd=1.2, col = "dimgray") +
+  geom_density_2d_filled(data = sf_gencln_samp_df, aes(x = X, y = Y))
+```
+
+\
+
+Heatmaps generally use heat color ramps:
+
+```{r}
+ggplot(sf_citybnd_ll) + geom_sf(lwd=1.2, col = "dimgray") +
+  annotation_map_tile(type = "osm", zoom = 14) +
+  geom_density_2d_filled(data = sf_gencln_samp_df, aes(x = X, y = Y), alpha = 0.5) +
+  geom_point(data = sf_gencln_samp_df, aes(x = X, y = Y), cex = 0.2, alpha = 0.2) +
+  scale_fill_brewer(palette = "YlOrRd")
+```
+
+\
+
+Other values you can use for palette:
+
+![](https://ajlyons.github.io/rspatial_bgs22/slides/images/brewer-ramps_800x492.png)
+
+## Alternative to Surfaces: Contour maps
+
+```{r}
+ggplot(sf_citybnd_ll) + geom_sf(lwd=1.2, col = "dimgray") +
+  geom_density_2d(data = sf_gencln_samp_df %>% sample_n(20000), aes(x = X, y = Y))
+```
+
+Where to next?
+
+
