@@ -7,7 +7,7 @@ In this notebook, we test out some methods for mapping with ggplot:
 
 # Load packages and set preferences
 
-```{r}
+```{r chunk01}
 library(sf)
 library(dplyr)
 library(ggplot2)
@@ -27,7 +27,7 @@ conflict_prefer("arrange", "dplyr", quiet = TRUE)
 
 Define some constants:
 
-```{r}
+```{r chunk02}
 epsg_geo_wgs84 <- 4326       ## General long-lat
 ```
 
@@ -35,13 +35,13 @@ epsg_geo_wgs84 <- 4326       ## General long-lat
 
 # Import Some SF data
 
-```{r}
+```{r chunk03}
 ## City boundary
-sf_citybnd_ll <- st_read(dsn = file.path(data_dir, "sf_citybnd.geojson"))
+sf_citybnd_ll <- st_read("./data/sf_citybnd.geojson")
 sf_citybnd_ll
 
 ## City neighborhoods
-sf_nb_ll <- st_read(dsn = file.path(data_dir, "sf_nb.geojson"))
+sf_nb_ll <- st_read(dsn = "./data/sf_nb.geojson")
 sf_nb_ll
 ```
 
@@ -51,7 +51,7 @@ sf_nb_ll
 
 Plot the city boundary:
 
-```{r}
+```{r chunk04}
 ggplot(sf_citybnd_ll) + geom_sf()
 ```
 
@@ -59,7 +59,7 @@ ggplot(sf_citybnd_ll) + geom_sf()
 
 Add the neighborhood boundaries:
 
-```{r}
+```{r chunk05}
 ggplot(sf_citybnd_ll) + geom_sf(lwd=1.2) +
   geom_sf(data = sf_nb_ll, aes(fill = nhood))
 ```
@@ -68,7 +68,7 @@ ggplot(sf_citybnd_ll) + geom_sf(lwd=1.2) +
 
 Get rid of the legend and add a tile:
 
-```{r}
+```{r chunk06}
 ggplot(sf_citybnd_ll) + geom_sf(lwd=1.2) +
   geom_sf(data = sf_nb_ll, aes(fill = nhood)) +
   theme(legend.position="none") +
@@ -79,7 +79,7 @@ ggplot(sf_citybnd_ll) + geom_sf(lwd=1.2) +
 
 Add a scale bar and compass (complements of ggspatial):
 
-```{r}
+```{r chunk07}
 library("ggspatial")
 ggplot(sf_citybnd_ll) + geom_sf(lwd=1.2) +
   geom_sf(data = sf_nb_ll, aes(fill = nhood)) +
@@ -98,7 +98,7 @@ Add a basemap from Open Street Map:
 
 Note: Zoom determines the amount of detail in the background map. It can vary from 1 (entire world) to 20 (an individual building). For a city, look for Zoom in the range of 10-12.
 
-```{r}
+```{r chunk08}
 ggplot(sf_citybnd_ll) + geom_sf(lwd=1.2) +
   annotation_map_tile(type = "osm", zoom = 12) +
   geom_sf(data = sf_nb_ll, col = "navy", fill = NA, lwd = 1.1) +
@@ -109,17 +109,14 @@ ggplot(sf_citybnd_ll) + geom_sf(lwd=1.2) +
 
 Other OSM maps you can use:
 
-```{r}
+```{r chunk09}
 rosm::osm.types()
 ```
 
 YOUR TURN: Try a different base map:
 
-```{r}
-ggplot(sf_citybnd_ll) + geom_sf(lwd=1.2) +
-  annotation_map_tile(type = "stamenbw", zoom = 12) +
-  geom_sf(data = sf_nb_ll, col = "navy", fill = NA, lwd = 1.1) +
-  ggtitle("San Francisco Neighborhoods")
+```{r chunk10}
+## YOUR ANSWER HERE!
 
 ```
 
@@ -127,7 +124,7 @@ ggplot(sf_citybnd_ll) + geom_sf(lwd=1.2) +
 
 You can also 'zoom in' by adding `coord_sf()`. For example to zoom into BayView Hunters Point:
 
-```{r}
+```{r chunk11}
 ggplot(sf_citybnd_ll) + geom_sf(lwd=1.2) +
   annotation_map_tile(type = "osm", zoom = 14) +
   geom_sf(data = sf_nb_ll, col = "navy", lwd=1.1,  fill = NA) +
@@ -148,10 +145,9 @@ ggplot(sf_citybnd_ll) + geom_sf(lwd=1.2) +
 
 Overlay the 311 calls for street and sidewalk general cleaning:
 
-```{r}
+```{r chunk12}
 ## City neighborhoods
-sf_gencln_ll <- st_read(dsn = file.path(data_dir, "sf_311_strt-sdwk-gncln_2015-21.gpkg"))
-## sf_gencln_ll <- st_read(dsn = "./data/sf_311_strt-sdwk-gncln_2015-21.gpkg")
+sf_gencln_ll <- st_read(dsn = "./data/sf_311_strt-sdwk-gncln_2015-21.gpkg")
 dim(sf_gencln_ll)
 ```
 
@@ -159,7 +155,7 @@ dim(sf_gencln_ll)
 
 496,000 is a lot of points for a map. Let's plot the first 5,000:
 
-```{r}
+```{r chunk13}
 ggplot(sf_citybnd_ll) + geom_sf(lwd=1.2, col = "dimgray") +
   geom_sf(data = sf_gencln_ll %>% slice(1:5000), cex = 0.5)
 
@@ -177,7 +173,7 @@ A 'heatmap' is actually a Kernel Density Estimator (raster). We have two options
 
 We'll go with Option #2. The only issue here is that `geom_density_2d_filled()` doesn't know how to deal with sf objects. It wants a data frame. So we'll give it a data frame:
 
-```{r}
+```{r chunk14}
 sf_gencln_df <- sf_gencln_ll %>% st_coordinates() %>% as.data.frame()
 sf_gencln_df %>% dim()
 sf_gencln_df %>% head()
@@ -188,13 +184,13 @@ sf_gencln_df %>% head()
 To speed up our experimentation, we'll use `sample_n()` to take 20,000 random samples.
 
 
-```{r}
+```{r chunk15}
 sf_gencln_samp_df <- sf_gencln_df %>% sample_n(20000)
 sf_gencln_samp_df %>% glimpse ()
 ```
 
 
-```{r}
+```{r chunk16}
 ggplot(sf_citybnd_ll) + geom_sf(lwd=1.2, col = "dimgray") +
   geom_density_2d_filled(data = sf_gencln_samp_df, aes(x = X, y = Y))
 ```
@@ -203,7 +199,7 @@ ggplot(sf_citybnd_ll) + geom_sf(lwd=1.2, col = "dimgray") +
 
 Heatmaps generally use heat color ramps:
 
-```{r}
+```{r chunk17}
 ggplot(sf_citybnd_ll) + geom_sf(lwd=1.2, col = "dimgray") +
   annotation_map_tile(type = "osm", zoom = 14) +
   geom_density_2d_filled(data = sf_gencln_samp_df, aes(x = X, y = Y), alpha = 0.5) +
@@ -219,7 +215,7 @@ Other values you can use for palette:
 
 ## Alternative to Surfaces: Contour maps
 
-```{r}
+```{r chunk18}
 ggplot(sf_citybnd_ll) + geom_sf(lwd=1.2, col = "dimgray") +
   geom_density_2d(data = sf_gencln_samp_df %>% sample_n(20000), aes(x = X, y = Y))
 ```
