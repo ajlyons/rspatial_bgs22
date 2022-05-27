@@ -1,0 +1,181 @@
+---
+title: "Find Suitable Locations for a New Campsite in Yosemite"
+output: 
+  html_notebook:
+    toc: yes
+    toc_float: yes
+---
+
+In this Notebook we'll compute some zonal stats, computing the average slope and elevation of each watershed in YNP.
+
+## Setup
+
+Load the packages we'll need and set tmap mode to 'plot':
+
+```{r chunk01}
+library(sf)
+library(raster)
+library(dplyr)
+library(tmap)
+tmap_mode("plot")
+
+## Load the conflicted package
+library(conflicted)
+conflict_prefer("filter", "dplyr", quiet = TRUE)
+conflict_prefer("count", "dplyr", quiet = TRUE)
+conflict_prefer("select", "dplyr", quiet = TRUE)
+conflict_prefer("arrange", "dplyr", quiet = TRUE)
+
+```
+
+\
+
+## Import Layers for Yosemite National Park
+
+For this analysis we'll need the park boundary, the watersheds, and a DEM (elevation) of the park. At the same time, we'll project everything to UTM.
+
+Begin by importing the layers (see also the notebook  :
+
+```{r chunk02}
+epsg_utm11n_wgs84 <- 32611
+epsg_geo_wgs84 <- 4326
+
+## Import the park boundary
+bnd_fn <- "./data/yose_boundary.shp"
+file.exists(bnd_fn)
+yose_bnd_utm <- st_read(bnd_fn) %>% 
+  st_transform(epsg_utm11n_wgs84)
+
+yose_wtrshds_utm <- st_read("./data/yose_watersheds.gpkg", layer="calw221") %>% 
+  st_transform(epsg_utm11n_wgs84)
+
+```
+
+Plot to verify:
+
+```{r chunk03}
+tm_shape(yose_wtrshds_utm) +
+  tm_borders(col = "gray", lwd = 1) +
+tm_shape(yose_bnd_utm) +
+  tm_borders(col = "red", lwd = 2) +
+tm_grid(lines = FALSE) +
+tm_layout(legend.outside = TRUE,
+          asp = 1.2)
+```
+
+## Import the DEM
+
+We have elevation data in the form of a tile of SRTM data.
+
+```{r chunk04}
+srtm1305_fn <- "./data/srtm_13_05.tif"
+file.exists(srtm1305_fn)
+
+srtm1305_rst <- raster(srtm1305_fn)
+srtm1305_rst
+```
+## Crop the DEM to the Park Boundary
+
+We can crop the large DEM to the park boundary using `raster::crop()`. Remember that the raster and the layer for the crop area need to be in the same CRS, so we transform the park boundary to geographic coordinates.
+
+```{r chunk05}
+yose_bnd_ll <- yose_bnd_utm %>% st_transform(epsg_geo_wgs84)
+
+yose_dem_rst_ll <- raster::crop(srtm1305_rst, yose_bnd_ll)
+
+yose_dem_rst_ll
+```
+
+Plot to verify:
+
+```{r chunk06}
+tm_shape(yose_dem_rst_ll) +
+  tm_raster(title = "Elevation (m)", style = "cont", n = 15, palette = terrain.colors(256)) +
+tm_shape(yose_bnd_ll) +
+  tm_borders(col = "red", lwd = 2) +
+tm_legend(outside = TRUE)
+```
+
+## Reproject the Clipped Raster
+
+Lastly, we need to project the park DEM into UTM using `projectRaster()` with the following arguments:
+
+- `from`: the raster we want to project 
+- `to`: omitted in this case (because we're supplying `crs` and `res`)  
+- `crs`: pass a proj4 string  
+- `res`: resolution in map units (which in the case of UTM is meters)  
+- `method`: choose 'blinear' but the cell values (elevation MSL) are continuous, and we want the interpolated values to also be continuous  
+
+```{r chunk07}
+## Define the proj4 string for UTM 11N
+utm11n_wgs84_proj4 <- "+init=epsg:32611"
+
+yose_dem_rst_utm <- projectRaster(from = yose_dem_rst_ll, 
+                              crs = CRS(utm11n_wgs84_proj4), 
+                              res = 90, 
+                              method = "bilinear")
+yose_dem_rst_utm
+```
+
+Plot to make sure it worked:
+
+```{r chunk08}
+tm_shape(yose_dem_rst_utm) +
+  tm_raster(title = "Elevation (m)", style = "cont", n = 15, palette = terrain.colors(256)) +
+tm_shape(yose_bnd_utm) +
+  tm_borders(col = "red", lwd = 2) +
+tm_grid(lines = FALSE) +
+tm_layout(legend.outside = TRUE,
+          asp = 1.2)
+```
+
+CHALLENGE: Compute average elevation per watershed.
+
+```{r chunk09}
+## Your answer here
+```
+
+\
+
+## Compute Slope
+
+Slope is one of the criteria for our campsite. We can compute the slope from the DEM using the `raster::terrain()`:
+
+```{r chunk10}
+yose_slope_rst <- raster::terrain(yose_dem_rst_utm, opt="slope")
+yose_slope_rst
+```
+
+Plot to make sure it worked. Note that slope is measured in [radians](https://en.wikipedia.org/wiki/Radian).
+
+```{r chunk11}
+tm_shape(yose_slope_rst) +
+  tm_raster(title = "Slope (radians)", style = "cont", n = 15, palette = gray.colors(256)) +
+tm_shape(yose_bnd_utm) +
+  tm_borders(col = "red", lwd = 2) +
+tm_grid(lines = FALSE) +
+tm_layout(legend.outside = TRUE,
+          asp = 1.2)
+```
+\
+
+Compute average slope per watershed.
+
+```{r chunk12}
+
+```
+
+
+## CHALLENGE: Add one more criteria
+
+Add one more criteria - exclude areas within 100m of an existing campsite. Hint: campsites are included in the `yose_poi.shp` layer. [Answer](https://bit.ly/2OnnFxA)
+
+```{r chunk13}
+
+```
+
+## End
+
+Congratulations, you completed another R Notebook. 
+
+Save your Notebook to generate a HTML preview of the code you ran.
