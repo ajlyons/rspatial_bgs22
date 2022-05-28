@@ -424,25 +424,83 @@ import code
 </div>
 <div id="san-francsico" class="section level1">
 <h1>San Francsico</h1>
+<p><h2 id="sf_bnd">sf_citybnd.geojson</h2></p>
+<ul>
+<li>San Francisco Boundary (excluding Treasure Island)</li>
+<li>Source: <a href="https://datasf.org" class="uri">https://datasf.org</a>
+<details>
+<summary>
+import code
+</summary>
+<pre>st_citybnd_ll <- sf::st_read("./data/sf_citybnd.geojson")</pre>
+</details></li>
+</ul>
 <p><h2 id="sf_nb">sf_nb.geojson</h2></p>
 <ul>
 <li>San Francisco Neighborhoods</li>
-<li>Source: <a href="https://datasf.org" class="uri">https://datasf.org</a></li>
+<li>Source: <a href="https://datasf.org" class="uri">https://datasf.org</a>
+<details>
+<summary>
+import code
+</summary>
+<pre>sf_nhoods_ll <- sf::st_read("./data/sf_nb.geojson")</pre>
+</details></li>
+</ul>
+<p><h2 id="sf_nb">sf_sup-dists-2022</h2></p>
+<ul>
+<li>San Francisco Supervisor Districts (2022)</li>
+<li>Source: <a href="https://datasf.org" class="uri">https://datasf.org</a>
+<details>
+<summary>
+import code
+</summary>
+<pre>sf_supdists_ll <- sf::st_read("./data/sf_sup-dists-2022.geojson")</pre>
+</details></li>
 </ul>
 <p><h2 id="sf_schools">sf_schools.shp</h2></p>
 <ul>
 <li>San Francisco Schools</li>
-<li>Source: <a href="https://datasf.org" class="uri">https://datasf.org</a></li>
+<li>Source: <a href="https://datasf.org" class="uri">https://datasf.org</a>
+<details>
+<summary>
+import code
+</summary>
+<pre>sf_schools_ll <- sf::st_read("./data/sf_schools.shp")</pre>
+</details></li>
 </ul>
-<p><h2 id="sf_libraries">sf_libraries.csv &amp; sf_libraries_latlon.csv</h2></p>
+<p><h2 id="311_strt-sdwk-cln">sf_311_strt-sdwk-cln_2021.gpkg</h2></p>
+<ul>
+<li>San Francisco 311 Calls for Street and Sidewalk Cleaning (2021)</li>
+<li>Source: <a href="https://datasf.org" class="uri">https://datasf.org</a>
+<details>
+<summary>
+import code
+</summary>
+<em>Importing can take a minute (278,000 locations)</em><br/>
+<pre>sf_311strtswlk_ll <- sf::st_read("./data/sf_311_strt-sdwk-cln_2021.gpkg", layer = "SF 311 Street Sidewalk Cleaning 2021")</pre>
+</details></li>
+</ul>
+<p><h2 id="sf_libraries">sf_libraries.csv &amp; sf_libraries_longlat.csv</h2></p>
 <ul>
 <li>Addresses of public libraries in San Francisco</li>
-<li>Source: <a href="https://datasf.org" class="uri">https://datasf.org</a></li>
+<li>Source: <a href="https://datasf.org" class="uri">https://datasf.org</a>
+<details>
+<summary>
+import code
+</summary>
+<pre>sf_libraries_df <- read.csv("./data/sf_libraries_longlat.csv")</pre>
+</details></li>
 </ul>
 <p><h2 id="sf_cannabis">sf_cannabis_2014.kml</h2></p>
 <ul>
 <li>San Francisco Permitted Medical Cannabis Dispensaries (2014)</li>
-<li>Source: <a href="https://datasf.org" class="uri">https://datasf.org</a></li>
+<li>Source: <a href="https://datasf.org" class="uri">https://datasf.org</a>
+<details>
+<summary>
+import code
+</summary>
+<pre>sf_cannabis_ll <- sf::st_read("./data/sf_cannabis_2014.kml", layer = "Cannabis Dispensaries 2014")</pre>
+</details></li>
 </ul>
 </div>
 <div id="california" class="section level1">
@@ -460,7 +518,7 @@ import code
 </ul>
 <p><h2 id="ca_breweries">ca_breweries.csv</h2></p>
 <ul>
-<li>Addresses of Breweries in California</li>
+<li>Addresses of breweries in California</li>
 </ul>
 <p><br />
 <br />

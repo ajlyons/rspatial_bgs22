@@ -1,4 +1,4 @@
-"ID","branch","phone.num","address","city","state","zip","lon","lat","score","locName","status","matchAddr","side","addressType"
+"ID","branch","phone.num","address","city","state","zip","long","lat","score","locName","status","matchAddr","side","addressType"
 1,"ANZA"," (415) 355-5717"," 550 37th Ave."," San Francisco"," CA",94121,-122.49747632,37.7785183720001,100,"World","M","550 37th Ave, San Francisco, California, 94121","R","PointAddress"
 2,"BAYVIEW / LINDA BROOKS-BURTON"," (415) 355-5757"," 5075 Third St."," San Francisco"," CA",94124,-122.391397951,37.7325412600001,100,"World","M","5075 3rd St, San Francisco, California, 94124","R","PointAddress"
 3,"BERNAL HEIGHTS"," (415) 355-2810"," 500 Cortland Ave."," San Francisco"," CA",94110,-122.416042814,37.7389866020001,100,"World","M","500 Cortland Ave, San Francisco, California, 94110","L","PointAddress"

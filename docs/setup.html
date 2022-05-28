@@ -381,18 +381,21 @@ pkgs_req &lt;- c(&quot;sp&quot;, &quot;tmap&quot;, &quot;tmaptools&quot;, &quot;
               &quot;RColorBrewer&quot;, &quot;raster&quot;, &quot;maps&quot;, &quot;tidyverse&quot;,  &quot;jsonlite&quot;, 
               &quot;rasterVis&quot;, &quot;GISTools&quot;, &quot;nngeo&quot;, &quot;lwgeom&quot;, &quot;remotes&quot;, 
               &quot;conflicted&quot;, &quot;tigris&quot;, &quot;tidycensus&quot;, &quot;stars&quot;,
-              &quot;googlesheets4&quot;, &quot;httr&quot;, &quot;rjson&quot;, &quot;RSocrata&quot;, &quot;usethis&quot;, &quot;rinat&quot;)
+              &quot;googlesheets4&quot;, &quot;httr&quot;, &quot;rjson&quot;, &quot;RSocrata&quot;, &quot;usethis&quot;, &quot;rinat&quot;,
+              &quot;ggspatial&quot;, &quot;rosm&quot;, &quot;wrkshputils&quot;)
 
 ## See which ones are missing
 (pkgs_missing &lt;- pkgs_req[!(pkgs_req %in% installed.packages()[,&quot;Package&quot;])])
 
 ## Install missing ones
-if (length(pkgs_missing)) install.packages(pkgs_missing, dependencies=TRUE)
+if (length(pkgs_missing)) install.packages(pkgs_missing, dependencies=TRUE,
+                                           repos = c(&#39;https://cloud.r-project.org&#39;, 
+                                                     &#39;https://ajlyons.r-universe.dev&#39;))
 
 ## Re-run the check for missing packages
 pkgs_missing &lt;- pkgs_req[!(pkgs_req %in% installed.packages()[,&quot;Package&quot;])]
 if (length(pkgs_missing)==0) cat(&quot;ALL PACKAGES WERE INSTALLED SUCCESSFULLY \n&quot;)</code></pre>
-<p class="indented1" style="border:2px solid grey; margin:1em 2em; padding:10px;">
+<p class="indented1" style="border:4px solid grey; background-color:#eee; margin:1em 2em; padding:10px;">
 <strong>TIP</strong>: If you are prompted by the question, <strong>‘Do you want to install from sources the package which needs compilation?’</strong>, select ‘<strong>No</strong>’.
 </p>
 <p><br />
