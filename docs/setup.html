@@ -347,7 +347,7 @@ pre {
 </script>
 <div id="computer-setup" class="section level2">
 <h2>Computer Setup</h2>
-<p>The workshop includes a number of hands-on exercises so you’ll need a <strong>laptop</strong> or <strong>desktop</strong> computer (Mac or Windows are both fine). As noted below, you can <strong>either</strong> install RStudio Desktop and a bunch of packages, <strong>or</strong> run RStudio in a browser using the RStudio Cloud platform. In either case, a <em>mouse is recommended</em> for navigating the interactive maps we’ll be creating. A <strong>second monitor</strong> is also strongly recommended (see <a href="#viewing-rstudio-and-zoom-simultaneously">more below</a>).</p>
+<p>The workshop includes a number of hands-on exercises so you’ll need a <strong>laptop</strong> or <strong>desktop</strong> computer (Mac or Windows are both fine). As described below, you can <strong>either</strong> install RStudio Desktop and a bunch of packages, <strong>or</strong> run RStudio in a browser using the RStudio Cloud platform. In either case, a <em>mouse is recommended</em> for navigating the interactive maps we’ll be creating. A <strong>second monitor</strong> is also strongly recommended (see <a href="#viewing-rstudio-and-zoom-simultaneously">more below</a>).</p>
 <p>RStudio Desktop is not a terribly big or computationally intensive program, however if your laptop is old and slow, consider using the RStudio Cloud service.</p>
 <div id="rstudio-cloud" class="section level3">
 <h3>RStudio Cloud</h3>
@@ -363,6 +363,7 @@ pre {
 <h3>RStudio Desktop</h3>
 <p>Alternately, you can install R and RStudio Desktop on your own computer. R is cross-platform, so Windows, Mac, or Linux should all work. R and RStudio Desktop are not large programs, but you should have 2Gb or more of free HD space (if your laptop is not sufficient consider using the RStudio Cloud option instead). Please install R, RStudio, and a number of packages as described below.</p>
 <div class="indented2">
+
 <p>1. <strong>Download and Install R</strong> (64-bit):</p>
 <p><a href="https://cran.r-project.org/" target="_blank">https://cran.r-project.org/</a></p>
 <p><em>Note</em>: If you already have R installed, please make sure you have version <strong>4.0</strong> or later. If needed, you can update R by downloading the latest version from CRAN and (re)installing it.</p>
@@ -382,7 +383,7 @@ pkgs_req &lt;- c(&quot;sp&quot;, &quot;tmap&quot;, &quot;tmaptools&quot;, &quot;
               &quot;rasterVis&quot;, &quot;GISTools&quot;, &quot;nngeo&quot;, &quot;lwgeom&quot;, &quot;remotes&quot;, 
               &quot;conflicted&quot;, &quot;tigris&quot;, &quot;tidycensus&quot;, &quot;stars&quot;,
               &quot;googlesheets4&quot;, &quot;httr&quot;, &quot;rjson&quot;, &quot;RSocrata&quot;, &quot;usethis&quot;, &quot;rinat&quot;,
-              &quot;ggspatial&quot;, &quot;rosm&quot;, &quot;wrkshputils&quot;)
+              &quot;ggspatial&quot;, &quot;rosm&quot;, &quot;ggimage&quot;, &quot;wrkshputils&quot;)
 
 ## See which ones are missing
 (pkgs_missing &lt;- pkgs_req[!(pkgs_req %in% installed.packages()[,&quot;Package&quot;])])
@@ -400,38 +401,57 @@ if (length(pkgs_missing)==0) cat(&quot;ALL PACKAGES WERE INSTALLED SUCCESSFULLY 
 </p>
 <p><br />
 </p>
-<p>4. <strong>Download the Workshop Data</strong></p>
-<p>The workshop data are on GitHub. Download the data (174 MB) by visiting <a href='https://ucdavis.box.com/shared/static/yv06a9m945uwlu3gm42e6zhdkr0f42v7.zip' target='_blank' ref='noopener' style='font-family:monospace;'>https://ucdavis.box.com/shared/static/yv06a9m945uwlu3gm42e6zhdkr0f42v7.zip</a>, and clicking the green download <img src="images/clone_download_btn_102x32x256.png" /> button. Unzip the file to your hard drive in a location of your choice.</p>
+<p>4. <strong>Download the Workshop Materials</strong></p>
+<p>The workshop slides, exercise notebooks, and data are all on GitHub (~170 Mb). You can download them to your computer by running:</p>
+<pre class = "r klippy copyme" style="font-size:80%;">
+usethis::use_course("ajlyons/rspatial_bgs22")
+</pre>
 <p><br />
 </p>
-<p>5. <strong>Set the working directory in RStudio</strong></p>
-<p>Set the working directory to the ‘parent’ of the data folder you just downloaded. In other words, if you put the ‘data’ folder into <code>C:/Workshops</code>, you would set the working directory to <code>C:/Workshops</code>.</p>
+<p>Alternately, you can go to the <a href="https://github.com/ajlyons/rspatial_bgs22" target="_blank" rel="noopener">GitHub Repo</a> and click the green ‘Code’ button. Remember to unzip the file to your hard drive in a location of your choice. Double-click the <em>rspatial_bgs22.Rproj</em> file to open the workshop materials in RStudio.</p>
 <p><br />
 </p>
+<!---------------------
+5\. **Set the working directory in RStudio**
+
+Set the working directory to the 'parent' of the data folder you just downloaded. In other words, if you put the 'data' folder into `C:/Workshops`, you would set the working directory to `C:/Workshops`.
+
+\
+
 <div class="indented2">
-<p><strong>TIP</strong>: An easy way to set the working directory is to goto the RStudio menu and select Session &gt;&gt; Set Working Directory &gt;&gt; Choose Directory.</p>
+**TIP**: An easy way to set the working directory is to goto the RStudio menu and select Session >> Set Working Directory >> Choose Directory.
 </div>
+
+\
+
+To verify the working directory is set correctly, copy-paste the following lines of code into the RStudio Console. If you see the image, your RStudio session is set up correctly.
+
+
+```{.r .klippy .copyme}
+## Copy-paste these lines into RStudio and run
+load("./data/test_pts.RData")
+plot(pts[[1]], asp=1, pch=16, cex=0.5, type="l", col="red", lwd=2, main="If you can see the picture,\nyour working directory is set correctly!")
+invisible(sapply(pts[2:4], points, asp=1, pch=16, cex=0.5, type="l"))
+```
+
+<img src="setup_files/figure-html/setwd_klippy-1.png" width="600" style="display: block; margin: auto;" />
+
+\
+
+6\. **Open the Slides**
+
+Go to [https://ajlyons.github.io/rspatial_bgs22](https://ajlyons.github.io/rspatial_bgs22){target="_blank"} to open the table of contents for the slides and exercises.
+
+To download a copy of all the workshop materials including the slides for offline viewing, go to [https://github.com/ajlyons/rspatial_bgs22](https://github.com/ajlyons/rspatial_bgs22){target="_blank"} and click the green 'code' button. The slides and notebooks will be in the docs folder. Note that the slides and exercises will be updated during the course, so you may want to wait until the course is over to download a copy to keep.
+
+</div> <!--- class indented2 
+--------->
 <p><br />
 </p>
-<p>To verify the working directory is set correctly, copy-paste the following lines of code into the RStudio Console. If you see the image, your RStudio session is set up correctly.</p>
-<pre class="r klippy copyme"><code>## Copy-paste these lines into RStudio and run
-load(&quot;./data/test_pts.RData&quot;)
-plot(pts[[1]], asp=1, pch=16, cex=0.5, type=&quot;l&quot;, col=&quot;red&quot;, lwd=2, main=&quot;If you can see the picture,\nyour working directory is set correctly!&quot;)
-invisible(sapply(pts[2:4], points, asp=1, pch=16, cex=0.5, type=&quot;l&quot;))</code></pre>
-<p><img src="setup_files/figure-html/setwd_klippy-1.png" width="600" style="display: block; margin: auto;" /></p>
-<p><br />
-</p>
-<p>6. <strong>Open the Slides</strong></p>
-<p>Go to <a href="https://ajlyons.github.io/rspatial_bgs22" target="_blank">https://ajlyons.github.io/rspatial_bgs22</a> to open the table of contents for the slides and exercises.</p>
-<p>To download a copy of all the workshop materials including the slides for offline viewing, go to <a href="https://github.com/ajlyons/rspatial_bgs22" target="_blank">https://github.com/ajlyons/rspatial_bgs22</a> and click the green ‘code’ button. The slides and notebooks will be in the docs folder. Note that the slides and exercises will be updated during the course, so you may want to wait until the course is over to download a copy to keep.</p>
-</div>
-<p><!--- class indented2 ---></p>
-<p><br />
-</p>
 </div>
 </div>
-<div id="workspace" class="section level2">
-<h2>Workspace</h2>
+<div id="setting-up-your-workspace" class="section level2">
+<h2>Setting up Your Workspace</h2>
 <p>Try to find a spot which is <strong>comfortable</strong> and <strong>relatively free</strong> from <strong>distractions and background noise</strong>. Some people find a pair of headphones helps minimize distractions.</p>
 <p><strong>Ergonomics</strong> are important! If you’ve ever tried to work on a laptop while sitting on a couch for multiple hours, it isn’t ideal! We will take at least one short bio-break each session.</p>
 <p>A <strong>second screen</strong> is extremely helpful, especially for hands-on workshops where you’ll be working through a software exercise. With a second screen, you can view the instructor’s slides or demo on one screen, and open RStudio on the other.</p>
@@ -441,9 +461,7 @@ invisible(sapply(pts[2:4], points, asp=1, pch=16, cex=0.5, type=&quot;l&quot;))<
 </div>
 <div id="slides-and-exercises" class="section level2">
 <h2>Slides and Exercises</h2>
-<p>Slides will be added to the course website before each session. The slides will be in HTML format, so you can follow-along online or view them as the instructor presents them on Zoom.</p>
-<p>Short exercises will be included in the <a href="https://ajlyons.github.io/rspatial_bgs22" target="_blank">slides</a>. Typically you’ll be asked to copy-paste starter code from the Zoom chat window into a R script, and then keep going from there.</p>
-<p>Other exercises will be in R Notebooks, that you’ll have to open in RStudio and complete. More info and links will be provided during the workshop.</p>
+<p>Slides will be added to the <a href="https://ajlyons.github.io/rspatial_bgs22" target="_blank" rel="noopener">course website</a> before each session. The slides will be in HTML format, so you can follow-along online, or view them as the instructor presents them on Zoom. Practice exercises will mostly be in <a href="notebooks.html">R Notebooks</a>, that you’ll have to open in RStudio and complete. More info and links will be provided during the workshop.</p>
 <p><br />
 </p>
 </div>
@@ -452,13 +470,10 @@ invisible(sapply(pts[2:4], points, asp=1, pch=16, cex=0.5, type=&quot;l&quot;))<
 <p>This workshop will be taught entirely online using the Zoom platform (the link will be sent you via email).</p>
 <div id="use-the-zoom-client" class="section level3">
 <h3>Use the Zoom Client</h3>
-<p>Although you can join Zoom meetings through a browser, we recommend installing the <a href="https://zoom.us/download" target="_blank" rel="noopener"><strong>Zoom Client (App)</strong></a> for Meetings. You may already have it if you’ve used Zoom before, and you see it in the Start Menu (Windows) or Finder (Mac). Please <strong>make sure you have the latest version</strong>, as some of the buttons and features have changed.</p>
+<p>Although you can join Zoom meetings through a browser, we recommend installing the <a href="https://zoom.us/download" target="_blank" rel="noopener"><strong>Zoom Client (App)</strong></a> for Meetings. You may already have it if you’ve used Zoom before, and you see it in the Start Menu (Windows) or Finder (Mac). Please <strong>make sure you have the latest version</strong>, as some of the buttons and features may have changed.</p>
 <p style="text-align:center; font-style:italic;">
 <img src="images/zoom_update360x632x256.png" style="padding:10px; width:300px;"/><br/>Check for updates on the Zoom app
 </p>
-<div class="indented2">
-<p><strong>Note</strong>: As of May 30 2020, Zoom will only allow you to connect to meetings with version 5.0 or higher of the Zoom client.</p>
-</div>
 <p>A <strong>Zoom account</strong> is <em>not</em> required. A <strong>webcam</strong> is <em>not</em> required.</p>
 </div>
 <div id="managing-zoom-audio" class="section level3">
@@ -472,7 +487,7 @@ invisible(sapply(pts[2:4], points, asp=1, pch=16, cex=0.5, type=&quot;l&quot;))<
 <h4>Dual Monitors (Best Option)</h4>
 <p>If you have an <strong>external monitor</strong> for your laptop / computer, you’re all set. (Tip: turn on Zoom’s <em>dual monitors</em> option, see below). Many TVs can be used as a second monitor depending on the video connections.</p>
 <p>If you don’t have a second monitor, a <strong>tablet</strong> may come in handy for viewing the slides / speaker. The Zoom App is available for all major tablets and phones.</p>
-<p>Note however if you watch the slides on a tablet, you should <strong>also</strong> have Zoom running on your laptop so you can take the polls, click on links in the chat window, share your screen with the instructor, etc. In that scenario, you’ll be logged into the Zoom meeting on two different devices, but only join the audio on one of the devices otherwise you may get a lot of echo!.</p>
+<p>Note however if you watch the slides on a tablet, you should <strong>also</strong> have Zoom running on your laptop so you can take the polls, click on links in the chat window, share your screen with the instructor, etc. In that scenario, you’ll be logged into the Zoom meeting on two different devices, but only join the audio on one of the devices otherwise you may get a lot of echo!</p>
 </div>
 </div>
 <div id="tips-for-using-zoom-on-a-single-screen" class="section level3">

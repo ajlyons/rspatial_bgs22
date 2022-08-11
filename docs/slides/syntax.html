@@ -233,7 +233,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <body>
 <script type="text/javascript">w3c_slidy.mouse_click_enabled = false;</script>
 <div class="slide titlepage">
-  <h1 class="title"><span class="course-title">Spatial Data Analysis with R </span><br/><span class="course-subtitle">BayGeo, Spring 2022</span></h1>
+  <h1 class="title"><span class="course-title">Spatial Data Analysis
+with R </span><br/><span class="course-subtitle">BayGeo, Spring
+2022</span></h1>
   <p class="author">
 R Syntax <br/><img src='images/rsyntax_485x140x256.png'/>
   </p>
@@ -260,35 +262,44 @@ How many decimals does R display by default?</p>
 </div>
 <!--- TryIt --->
 <div class="tip">
-<p>White space is generally ignored in R (but helpful for readability).</p>
+<p>White space is generally ignored in R (but helpful for
+readability).</p>
 <p>Everything in R is case sensitive.</p>
-<p>The <tt>#</tt> character tells R that what comes after is a comment.</p>
+<p>The <tt>#</tt> character tells R that what comes after is a
+comment.</p>
 </div>
 </div>
 <div id="variables" class="slide section level1">
 <h1>Variables</h1>
-<p>A key technique in all programming languages is to store values in the form of variables.</p>
-<p>In R, you can use the ‘<tt>=</tt>’ or ‘<tt>&lt;-</tt>’ operators to do this.</p>
+<p>A key technique in all programming languages is to store values in
+the form of variables.</p>
+<p>In R, you can use the ‘<tt>=</tt>’ or ‘<tt>&lt;-</tt>’ operators to
+do this.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## These are equivalent:</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">3</span><span class="sc">^</span><span class="dv">3</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> <span class="dv">3</span><span class="sc">^</span><span class="dv">3</span></span></code></pre></div>
 <div class="tip">
-<p>RStudio keyboard shortcut to insert ‘<tt>&lt;-</tt>’: <em>alt + -</em></p>
+<p>RStudio keyboard shortcut to insert ‘<tt>&lt;-</tt>’: <em>alt +
+-</em></p>
 <p>The term ‘variable’ and ‘object’ are generally synonymous.</p>
-<p>Note when you assign a value to a variable, R doesn’t print the result to the console. To see the value of a variable, simply type it by itself.</p>
+<p>Note when you assign a value to a variable, R doesn’t print the
+result to the console. To see the value of a variable, simply type it by
+itself.</p>
 </div>
-<p>Pretty much anything can be saved to a variable. Here we save some text and dates.</p>
+<p>Pretty much anything can be saved to a variable. Here we save some
+text and dates.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>flv <span class="ot">&lt;-</span> <span class="st">&quot;vanilla&quot;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>flv</span></code></pre></div>
 <pre><code>## [1] &quot;vanilla&quot;</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>start_date <span class="ot">&lt;-</span> <span class="fu">Sys.Date</span>()</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>start_date</span></code></pre></div>
-<pre><code>## [1] &quot;2022-05-12&quot;</code></pre>
+<pre><code>## [1] &quot;2022-06-20&quot;</code></pre>
 </div>
 <div id="updating-variables" class="slide section level1">
 <h1>Updating Variables</h1>
 <p>You can give a new value to a variable at any time.</p>
-<p>You can use ‘current’ value as part of the expression for the ‘new’ value.</p>
+<p>You can use ‘current’ value as part of the expression for the ‘new’
+value.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">2</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># x is now 2</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -297,18 +308,23 @@ How many decimals does R display by default?</p>
 </div>
 <div id="naming-variables" class="slide section level1">
 <h1>Naming Variables</h1>
-<p>The rules for naming variables are pretty flexible. You can use numbers, letters, and most special characters.</p>
+<p>The rules for naming variables are pretty flexible. You can use
+numbers, letters, and most special characters.</p>
 <p>Rules to take note of:</p>
 <div class="indented2">
 <ul>
 <li>Can’t start with a number (e.g., <em>3pieces</em>)<br />
 </li>
 <li>Hyphens and spaces are not allowed</li>
-<li>Don’t use the name of a function (like ‘<tt>c</tt>’) or a reserved keyword (like <tt>pi</tt>)</li>
+<li>Don’t use the name of a function (like ‘<tt>c</tt>’) or a reserved
+keyword (like <tt>pi</tt>)</li>
 </ul>
 </div>
 <h2 id="naming-styles">Naming Styles</h2>
-<p>There are a handful of popular <a href="https://www.r-bloggers.com/consistent-naming-conventions-in-r/" target="_blank">naming styles</a>. Pick one that you like, and be consistent!</p>
+<p>There are a handful of popular <a
+href="https://www.r-bloggers.com/consistent-naming-conventions-in-r/"
+target="_blank">naming styles</a>. Pick one that you like, and be
+consistent!</p>
 <table class="tbl_compact">
 <thead>
 <tr>
@@ -366,7 +382,8 @@ SignatureMethod
 </div>
 <div id="data-types" class="slide section level1">
 <h1>Data Types</h1>
-<p>All variables have a class or data type, which you can view using <tt><strong>class()</strong></tt>.</p>
+<p>All variables have a class or data type, which you can view using
+<tt><strong>class()</strong></tt>.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>num_plots <span class="ot">&lt;-</span> <span class="dv">10</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(num_plots)</span></code></pre></div>
 <pre><code>## [1] &quot;numeric&quot;</code></pre>
@@ -389,39 +406,49 @@ SignatureMethod
 </div>
 <div id="vectors" class="slide section level1">
 <h1>Vectors</h1>
-<p>Most variables are <strong>vectors</strong>, in other words they can store multiple values. For basic data types, like numbers and characters, these are called <strong>vectors</strong>.</p>
-<p>When we enter <tt>x &lt;- 1</tt>, we are actually creating a numeric vector of length 1.</p>
+<p>Most variables are <strong>vectors</strong>, in other words they can
+store multiple values. For basic data types, like numbers and
+characters, these are called <strong>vectors</strong>.</p>
+<p>When we enter <tt>x &lt;- 1</tt>, we are actually creating a numeric
+vector of length 1.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">24</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## [1] 24</code></pre>
 <p><br />
-<tt><strong>rep()</strong></tt> is a function that repeats a value, returning a vector:</p>
+<tt><strong>rep()</strong></tt> is a function that repeats a value,
+returning a vector:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="st">&quot;ball&quot;</span>, <span class="dv">5</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>y</span></code></pre></div>
 <pre><code>## [1] &quot;ball&quot; &quot;ball&quot; &quot;ball&quot; &quot;ball&quot; &quot;ball&quot;</code></pre>
 <p><br />
-<tt><strong>rnorm()</strong></tt> is a function that can generate multiple random numbers:</p>
+<tt><strong>rnorm()</strong></tt> is a function that can generate
+multiple random numbers:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>devs <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">5</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>devs</span></code></pre></div>
-<pre><code>## [1] -1.0940356  0.1530868 -1.2855072 -0.6918893  0.6730572</code></pre>
+<pre><code>## [1]  1.0578296 -0.4471765  0.6126390 -1.7364578 -0.4345755</code></pre>
 <p><br />
-<tt>c()</tt> stands for <em>combine</em>. It returns a vector containing the arguments passed (which all have to be the same type).</p>
+<tt>c()</tt> stands for <em>combine</em>. It returns a vector containing
+the arguments passed (which all have to be the same type).</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>yn <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>yn</span></code></pre></div>
 <pre><code>## [1]  TRUE FALSE  TRUE</code></pre>
 <p><br />
-<tt>LETTERS</tt> is an example of a built-in <strong>constant</strong>. It contains a vector of length 26 containing characters:</p>
+<tt>LETTERS</tt> is an example of a built-in <strong>constant</strong>.
+It contains a vector of length 26 containing characters:</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>LETTERS</span></code></pre></div>
 <pre><code>##  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot; &quot;K&quot; &quot;L&quot; &quot;M&quot; &quot;N&quot; &quot;O&quot; &quot;P&quot; &quot;Q&quot; &quot;R&quot; &quot;S&quot; &quot;T&quot; &quot;U&quot; &quot;V&quot; &quot;W&quot; &quot;X&quot; &quot;Y&quot; &quot;Z&quot;</code></pre>
 <div class="infobox">
-<p>The <tt><em>[1]</em></tt> and <tt><em>[18]</em></tt> in the output tells you the index of the element displayed after it.</p>
+<p>The <tt><em>[1]</em></tt> and <tt><em>[18]</em></tt> in the output
+tells you the index of the element displayed after it.</p>
 </div>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(LETTERS)</span></code></pre></div>
 <pre><code>## [1] 26</code></pre>
 </div>
 <div id="filtering" class="slide section level1">
 <h1>Filtering</h1>
-<p>To extract a single element from a vector, use square bracket notation. Inside the square brackets, put the index of the element you want.</p>
+<p>To extract a single element from a vector, use square bracket
+notation. Inside the square brackets, put the index of the element you
+want.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>LETTERS[<span class="dv">2</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;B&quot;</code></pre>
 <p>To return multiple elements, pass multiple indices.</p>
@@ -429,13 +456,15 @@ SignatureMethod
 <pre><code>## [1] &quot;B&quot; &quot;C&quot; &quot;D&quot;</code></pre>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>LETTERS[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;B&quot; &quot;C&quot; &quot;D&quot;</code></pre>
-<p>You can also use square brackets to extract elements in a different order.</p>
+<p>You can also use square brackets to extract elements in a different
+order.</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>LETTERS[<span class="dv">4</span><span class="sc">:</span><span class="dv">2</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;D&quot; &quot;C&quot; &quot;B&quot;</code></pre>
 </div>
 <div id="working-with-functions" class="slide section level1">
 <h1>Working with Functions</h1>
-<p>The keys to R’s superpowers are <strong>functions</strong>! There are <strong>four things</strong> you need to know to use a function:</p>
+<p>The keys to R’s superpowers are <strong>functions</strong>! There are
+<strong>four things</strong> you need to know to use a function:</p>
 <style>img.stackme {position:absolute; top:0; left:0;}</style>
 <div style='position:relative; border:none; height:450px;width:901px; margin:0 auto; '>
 <img src="images/foo_01.png"/>
@@ -447,17 +476,23 @@ SignatureMethod
 </div>
 <div id="function-arguments" class="slide section level1">
 <h1>Function Arguments</h1>
-<p>Many functions take arguments. Arguments can be <strong>required</strong> or <strong>optional</strong>.</p>
-<p>See the function’s help page to determine which arguments are expected.</p>
-<p><img src="./images/rnorm_help_16cols_930x690.png" style="border:1px solid gray; margin-left:1em;" /></p>
-<p>If you pass arguments to a function <strong>in the order expected</strong> and <strong>don’t skip any</strong>, you don’t have to name them:</p>
+<p>Many functions take arguments. Arguments can be
+<strong>required</strong> or <strong>optional</strong>.</p>
+<p>See the function’s help page to determine which arguments are
+expected.</p>
+<p><img src="./images/rnorm_help_16cols_930x690.png"
+style="border:1px solid gray; margin-left:1em;" /></p>
+<p>If you pass arguments to a function <strong>in the order
+expected</strong> and <strong>don’t skip any</strong>, you don’t have to
+name them:</p>
 <div class="indented1 indented1r">
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">500</span>, <span class="dv">50</span>, <span class="dv">3</span>)  <span class="do">## generate 500 normally distributed random</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>                   <span class="do">## numbers with a mean of 50 and stand dev = 3.</span></span></code></pre></div>
 </div>
 <p><br />
 </p>
-<p>If you don’t pass arguments in expected order (or skip some), you have to name them in the parentheses:</p>
+<p>If you don’t pass arguments in expected order (or skip some), you
+have to name them in the parentheses:</p>
 <div class="indented1 indented1r">
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n=</span><span class="dv">100</span>, <span class="at">sd=</span><span class="fl">0.3</span>) <span class="do">## generate 100 normally distributed random</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>                     <span class="do">## numbers with stand deviation = 0.3</span></span></code></pre></div>
@@ -465,7 +500,8 @@ SignatureMethod
 </div>
 <div id="r-notebook-exercise" class="slide section level1">
 <h1>R Notebook Exercise</h1>
-<p>R Notebooks are written in “R Markdown”, which combines text and R code.</p>
+<p>R Notebooks are written in “R Markdown”, which combines text and R
+code.</p>
 <style>img.stackme {position:absolute; top:0; left:0;}</style>
 <div style='position:relative; border:none; height:768px;'>
 <img src="images/rnotebooks%20(1).png"/>
@@ -499,7 +535,8 @@ SignatureMethod
 <p>
 <br/>
 <hr/>
-<strong>Next: </strong> <a href="packages.html">Working with Packages</a>
+<strong>Next: </strong> <a href="packages.html">Working with
+Packages</a>
 </p>
 </div>
 
